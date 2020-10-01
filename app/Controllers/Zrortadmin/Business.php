@@ -9,7 +9,7 @@ class Business extends BaseController
 {
 	public function __construct(...$params)
 	{
-		helper('zarorat_functions_helper');
+		helper('zarorat_functions_helper'); 
 	}
 	public function index()
 	{
@@ -22,7 +22,8 @@ class Business extends BaseController
 	}
 
 	public function view($slug = null)
-	{
+	{   
+	
 		$model = new BusinessModel();
 		$data['business'] = $model->getBusiness($slug);
 	}
