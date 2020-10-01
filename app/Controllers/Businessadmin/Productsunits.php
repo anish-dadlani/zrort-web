@@ -1,16 +1,20 @@
 <?php namespace App\Controllers\Businessadmin;
-use App\Models\ProductsunitsModel;
+use App\Models\Businessadmin\ProductsunitsModel;
 use CodeIgniter\Controller;
 
 use App\Controllers\BaseController;
 class Productsunits extends BaseController
 {
+	public function __construct(...$params)
+	{
+		helper('zarorat_functions_helper');
+	}
 	public function index()
 	{
 		$model = new ProductsunitsModel();
 		$displaydata['productsunits'] = $model->getProductsunits();
 		$data['pageTitle'] = 'Products Units Listing';
-		$data['fileToLoad'] = '/productsunits/overview';
+		$data['fileToLoad'] = '/Businessadmin/productsunits/overview';
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
@@ -23,7 +27,7 @@ class Productsunits extends BaseController
 	public function add_productsunits()
 	{
 		$data['pageTitle'] = 'Products Units Add';
-		$data['fileToLoad'] = '/productsunits/add_productsunits';
+		$data['fileToLoad'] = '/Businessadmin/productsunits/add_productsunits';
 		$data['data'] = $data;
 		echo view('templates/admin/zarorat_template', $data);
 	}
@@ -31,15 +35,15 @@ class Productsunits extends BaseController
 	{
 		//print_r($_POST); exit();
 		$model = new ProductsunitsModel();
-
+		$user_id =   $this->session->get('user_id');
 		if (! $this->validate([
-			'unit_title' => 'required',
-			'description'  => 'required',
+			'unit_title' => 'required|min_length[3]',
+			'description'  => 'required|min_length[20]',
 			'is_active'  => 'required'
 		]))
 		{
 			$data['pageTitle'] = 'Products Units Add';
-			$data['fileToLoad'] = '/productsunits/add_productsunits';
+			$data['fileToLoad'] = '/Businessadmin/productsunits/add_productsunits';
 			$data['data'] = $data;
 			echo view('templates/admin/zarorat_template', $data);
 
@@ -50,11 +54,12 @@ class Productsunits extends BaseController
 				'unit_title' => $this->request->getPost('unit_title'),
 				'description' => $this->request->getPost('description'),
 				'is_active' => $this->request->getPost('is_active'),
-				'created_by' => 1,
-				'updated_by' => 1
+				'created_by' => $user_id,
+				'updated_by' => $user_id 
 			);
 			$save = $model->productsunits_save($data); 
-			return redirect()->route('productsunits');
+			zrortadmin_activityLog('configuration','ProductsUnits Added',$data);
+			return redirect()->route('Productsunits');
 		}
 	}
 	public function view_productsunits($id=null)
@@ -62,7 +67,7 @@ class Productsunits extends BaseController
 		$model = new ProductsunitsModel();
 		$displaydata['productsunits_view'] = $model->getProductsunits($id);
 		$data['pageTitle'] = 'Products Units View';
-		$data['fileToLoad'] = '/productsunits/productsunits_view';
+		$data['fileToLoad'] = '/Businessadmin/productsunits/productsunits_view';
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
@@ -71,7 +76,7 @@ class Productsunits extends BaseController
 		$model = new ProductsunitsModel();
 		$displaydata['productsunits_edit'] = $model->getProductsunits($id);
 		$data['pageTitle'] = 'Products Units Edit';
-		$data['fileToLoad'] = '/productsunits/productsunits_edit';
+		$data['fileToLoad'] = '/Businessadmin/productsunits/productsunits_edit';
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
@@ -84,20 +89,23 @@ class Productsunits extends BaseController
 				'is_active_date'=> date('Y-m-d h:i:s') */
 		);
 		$save =$model->delete_productsunits($id,$data);
-		return redirect()->route('productsunits');
+		zrortadmin_activityLog('configuration','ProductsUnits Deleted',$data);
+		return redirect()->route('Productsunits');
 	}
 	public function update_productsunits()
 	{
 		$model = new ProductsunitsModel();
 		$id = $this->request->getPost('pk_id');
+		$user_id =   $this->session->get('user_id');
 			$data = array(
 				'unit_title' => $this->request->getPost('unit_title'),
 				'description' => $this->request->getPost('description'),
 				'is_active' => $this->request->getPost('is_active'),
-				'created_by' => 1,
-				'updated_by' => 1
+				'created_by' => $user_id,
+				'updated_by' => $user_id
 			);	
 		$save = $model->update_productsunits($data,$id);
-		return redirect()->route('productsunits');
+		zrortadmin_activityLog('configuration','ProductsUnits Updated',$data);
+		return redirect()->route('Productsunits');
 	}
 }

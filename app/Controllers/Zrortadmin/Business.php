@@ -1,18 +1,22 @@
 <?php namespace App\Controllers\Zrortadmin;
-use App\Models\BusinessModel;
-use App\Models\BusinessadminsModel;
-use App\Models\BusinesscategoriesModel;
+use App\Models\Zrortadmin\BusinessModel;
+use App\Models\Zrortadmin\BusinessadminsModel;
+use App\Models\Zrortadmin\BusinesscategoriesModel;
 use CodeIgniter\Controller;
 
 use App\Controllers\BaseController;
 class Business extends BaseController
 {
+	public function __construct(...$params)
+	{
+		helper('zarorat_functions_helper');
+	}
 	public function index()
 	{
 		$model = new BusinessModel();
 		$displaydata['business'] = $model->getBusiness();
 		$data['pageTitle'] = 'Business Listing';
-		$data['fileToLoad'] = '/business/overview';
+		$data['fileToLoad'] = '/Zrortadmin/business/overview';
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
@@ -27,37 +31,37 @@ class Business extends BaseController
 		$businesscategories_model = new BusinesscategoriesModel();
 		$data['get_businesscategories'] = $businesscategories_model->getBusinesscategories();
 		$data['pageTitle'] = 'Business Add';
-		$data['fileToLoad'] = '/business/add_business';
+		$data['fileToLoad'] = '/Zrortadmin/business/add_business';
 		$data['data'] = $data;
 		echo view('templates/admin/zarorat_template', $data);
 	}
 	public function business_save()
 	{
-		//print_r($_POST); exit();
 		$model = new BusinessModel();
 		$businessadmins_model = new BusinessadminsModel();
+		$user_id =   $this->session->get('user_id');
 		if (! $this->validate([ 
-			'business_number' => 'required',
-			'name'  => 'required',
-			'country'  => 'required', 
-			'state'  => 'required', 
-			'city'  => 'required', 
-			'postalcode'  => 'required', 
-			'lat'  => 'required', 
-			'lang'  => 'required', 
+			'business_number' => 'required|numeric',
+			'name'  => 'required|alpha|min_length[3]',
+			'country'  => 'required|alpha', 
+			'state'  => 'required|alpha', 
+			'city'  => 'required|alpha', 
+			'postalcode'  => 'required|numeric', 
+			'lat'  => 'required|numeric', 
+			'lang'  => 'required|numeric', 
 			'business_website'  => 'required', 
-			'business_email'  => 'required', 
-			'business_mobile'  => 'required', 
-			'business_landline'  => 'required', 
-			'business_address'  => 'required', 
-			'status'  => 'required', 
+			'business_email'  => 'required|valid_email', 
+			'business_mobile'  => 'required|numeric|max_length[10]', 
+			'business_landline'  => 'required|numeric|max_length[8]', 
+			'business_address'  => 'required|min_length[5]', 
+			'status'  => 'required|alpha', 
 			'is_active'  => 'required', 
-			'delivery_fee'  => 'required', 
-			'min_delivery_price'  => 'required', 
+			'delivery_fee'  => 'required|numeric', 
+			'min_delivery_price'  => 'required|numeric', 
 			'min_delivery_time'  => 'required', 
-			'firstname'  => 'required', 
-			'lastname'  => 'required', 
-			'username'  => 'required', 
+			'firstname'  => 'required|min_length[3]|alpha', 
+			'lastname'  => 'required|min_length[3]|alpha', 
+			'username'  => 'required|min_length[3]|alpha', 
 			'password_hash'  => 'required',
 			'file' => [
                 'uploaded[file]',
@@ -66,8 +70,10 @@ class Business extends BaseController
             ],
 		]))
 		{   
+			$businesscategories_model = new BusinesscategoriesModel();
+			$data['get_businesscategories'] = $businesscategories_model->getBusinesscategories();
 			$data['pageTitle'] = 'Business Add';
-			$data['fileToLoad'] = '/business/add_business';
+			$data['fileToLoad'] = '/Zrortadmin/business/add_business';
 			$data['data'] = $data;
 			echo view('templates/admin/zarorat_template', $data);
 
@@ -96,12 +102,11 @@ class Business extends BaseController
 				'password_hash' => $password_hash,
 				'email' => $this->request->getPost('business_email'),
 				'contact' => $this->request->getPost('business_mobile'),
-				'created_by' =>  1,
-				'updated_by' =>  1
+				'created_by' =>  $user_id,
+				'updated_by' =>  $user_id
 			); 
-			//print_r($business_admin_data); exit();
 			$business_admin_id = $businessadmins_model->businessadmins_save($business_admin_data); 
-			//print_r($business_admin_id); exit();
+			zrortadmin_activityLog('configuration','BusinessAdmin Added',$business_admin_data);;
 			$business_data = array(
 				'business_number' => $this->request->getPost('business_number'),
 				'name' => $this->request->getPost('name'),
@@ -127,11 +132,12 @@ class Business extends BaseController
 				'business_category_id' =>$this->request->getPost('business_category_id'),
 				'cover_photo' => $fullimgpath,
 				'business_logo' => $business_logo,
-				'created_by' => 1,
-				'updated_by' => 1
+				'created_by' => $user_id,
+				'updated_by' => $user_id
 			);  
-			$save = $model->business_save($business_data); 
-			return redirect()->route('business');
+			$save = $model->business_save($business_data);
+			zrortadmin_activityLog('configuration','Business Added',$business_data);			
+			return redirect()->route('Business');
 		}
 	}
 	public function view_business($id=null)
@@ -144,7 +150,7 @@ class Business extends BaseController
 		$businesscategories_model = new BusinesscategoriesModel();
 		$displaydata['get_businesscategories'] = $businesscategories_model->getBusinesscategories();
 		$data['pageTitle'] = 'Business View';
-		$data['fileToLoad'] = '/business/business_view';
+		$data['fileToLoad'] = '/Zrortadmin/business/business_view';
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
@@ -158,27 +164,27 @@ class Business extends BaseController
 		$businesscategories_model = new BusinesscategoriesModel();
 		$displaydata['get_businesscategories'] = $businesscategories_model->getBusinesscategories();
 		$data['pageTitle'] = 'Business Edit';
-		$data['fileToLoad'] = '/business/business_edit';
+		$data['fileToLoad'] = '/Zrortadmin/business/business_edit';
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
 	public function delete_business($id=null)
 	{
-		//print_r($id); exit();
 		$model = new BusinessModel();
 		$data = array(
 				'is_active'=>"0",
 				'udpated_datetime'=> date('Y-m-d h:i:s')
 		);
 		$save =$model->delete_business($id,$data);
-		return redirect()->route('business');
+		zrortadmin_activityLog('configuration','Business Deleted',$data);
+		return redirect()->route('Business');
 	}
 	public function update_business()
 	{
 		$model = new BusinessModel();
 		$businessadmins_model = new BusinessadminsModel();
 		$id = $this->request->getPost('pk_id');
-		
+		$user_id =   $this->session->get('user_id');
 		//cover photo
 		$avatar=$this->request->getFile('file');
 		$check_file =$avatar->getClientName();
@@ -215,12 +221,11 @@ class Business extends BaseController
 				'password_hash' => $password_hash,
 				'email' => $this->request->getPost('business_email'),
 				'contact' => $this->request->getPost('business_mobile'),
-				'created_by' =>  1,
-				'updated_by' =>  1
+				'created_by' => $user_id,
+				'updated_by' => $user_id
 			); 
-			//print_r($business_admin_data); exit();
 			$update_admindata = $businessadmins_model->update_businessadmins($business_admin_data,$business_admin_id); 
-			//print_r($business_admin_id); exit();
+			zrortadmin_activityLog('configuration','BusinessAdmin Updated',$business_admin_data);
 			$business_data = array(
 				'business_number' => $this->request->getPost('business_number'),
 				'name' => $this->request->getPost('name'),
@@ -246,10 +251,11 @@ class Business extends BaseController
 				'business_category_id' =>$this->request->getPost('business_category_id'),
 				'cover_photo' => $fullimgpath,
 				'business_logo' => $business_logo,
-				'created_by' => 1,
-				'updated_by' => 1
+				'created_by' => $user_id,
+				'updated_by' => $user_id
 			);  
 		$save = $model->update_business($business_data,$id);
-		return redirect()->route('business');
+		zrortadmin_activityLog('configuration','Business Updated',$business_data);
+		return redirect()->route('Business');
 	}
 }

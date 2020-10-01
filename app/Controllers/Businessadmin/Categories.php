@@ -1,19 +1,23 @@
 <?php namespace App\Controllers\Businessadmin;
-use App\Models\CategoriesModel;
-use App\Models\BusinessModel;
+use App\Models\Businessadmin\CategoriesModel;
+use App\Models\Zrortadmin\BusinessModel;
 use CodeIgniter\Controller;
 
 use App\Controllers\BaseController;
 class Categories extends BaseController
 {
+	public function __construct(...$params)
+	{
+		helper('business_function_helper');
+	}
 	public function index()
 	{
 		$model = new CategoriesModel();
 		$displaydata['categories'] = $model->getCategories();
 		$data['pageTitle'] = 'Categories Listing';
-		$data['fileToLoad'] = '/categories/overview';
+		$data['fileToLoad'] = '/Businessadmin/categories/overview';
 		$data['data'] = $displaydata;
-		echo view('templates/admin/zarorat_template', $data);
+		echo view('templates/business/business_template', $data);
 	}
 
 	public function view($slug = null)
@@ -28,20 +32,21 @@ class Categories extends BaseController
 		$business_model = new BusinessModel();
 		$data['business'] = $business_model->getBusiness();
 		$data['pageTitle'] = 'Categories Add';
-		$data['fileToLoad'] = '/categories/add_categories';
+		$data['fileToLoad'] = '/Businessadmin/categories/add_categories';
 		$data['data'] = $data;
-		echo view('templates/admin/zarorat_template', $data);
+		echo view('templates/business/business_template', $data);
 	}
 	public function categories_save()
 	{
 		//print_r($_POST); exit();
-		helper(['form', 'url']);
 		$model = new CategoriesModel();
-
+		$businessuser_id =   $this->session->get('businessuser_id');
 		if (! $this->validate([
-			'name' => 'required',
-			'description'  => 'required',
-			'shortname'  => 'required',
+			'name' => 'required|min_length[3]',
+			'description'  => 'required|min_length[20]',
+			'shortname'  => 'required|min_length[3]',
+			'tags'  => 'required|min_length[3]',
+			'list_order_numb'  => 'required|numeric',
 			'file' => [
                 'uploaded[file]',
                 'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
@@ -49,10 +54,12 @@ class Categories extends BaseController
             ],
 		]))
 		{
+			$business_model = new BusinessModel();
+			$data['business'] = $business_model->getBusiness();
 			$data['pageTitle'] = 'Categories Add';
-			$data['fileToLoad'] = '/categories/add_categories';
+			$data['fileToLoad'] = '/Businessadmin/categories/add_categories';
 			$data['data'] = $data;
-			echo view('templates/admin/zarorat_template', $data);
+			echo view('templates/business/business_template', $data);
 
 		}
 		else
@@ -65,17 +72,19 @@ class Categories extends BaseController
 			$data = array(
 				'name' => $this->request->getPost('name'),
 				'shortname' => $this->request->getPost('shortname'),
+				'list_order_numb' => $this->request->getPost('list_order_numb'),
+				'tags' => $this->request->getPost('tags'),
 				'bussiness_id' => $this->request->getPost('bussiness_id'),
 				'is_active' => $this->request->getPost('is_active'),
 				'description' => $this->request->getPost('description'),
 				'image_path' =>  $fullimgpath,
 				'thumbnail_path' =>  $fullimgpath,
-				'created_by' => 1,
-				'updated_by' => 1,
-				'created_datetime' => date('Y-m-d H:i:s')
+				'created_by' => $businessuser_id,
+				'updated_by' => $businessuser_id
 			);
 			$save = $model->categories_save($data); 
-			return redirect()->route('categories');
+			businessadmin_activityLog('configuration','Categories Added',$data);
+			return redirect()->route('Categories');
 		}
 	}
 	public function view_categories($id=null)
@@ -85,9 +94,9 @@ class Categories extends BaseController
 		$business_model = new BusinessModel();
 		$data['business'] = $business_model->getBusiness();
 		$data['pageTitle'] = 'Categories View';
-		$data['fileToLoad'] = '/categories/categories_view';
+		$data['fileToLoad'] = '/Businessadmin/categories/categories_view';
 		$data['data'] = $displaydata;
-		echo view('templates/admin/zarorat_template', $data);
+		echo view('templates/business/business_template', $data);
 	}
 	public function edit_categories($id=null)
 	{ 
@@ -96,9 +105,9 @@ class Categories extends BaseController
 		$business_model = new BusinessModel();
 		$data['business'] = $business_model->getBusiness();
 		$data['pageTitle'] = 'Categories Edit';
-		$data['fileToLoad'] = '/categories/categories_edit';
+		$data['fileToLoad'] = '/Businessadmin/categories/categories_edit';
 		$data['data'] = $displaydata;
-		echo view('templates/admin/zarorat_template', $data);
+		echo view('templates/business/business_template', $data);
 	}
 	public function delete_categories($id=null)
 	{
@@ -108,13 +117,15 @@ class Categories extends BaseController
 				'udpated_datetime'=> date('Y-m-d h:i:s') 
 		);
 		$save =$model->delete_categories($id,$data);
-		return redirect()->route('categories');
+		businessadmin_activityLog('configuration','Categories Deleted',$data);
+		return redirect()->route('Categories');
 	}
 	public function update_categories()
 	{
 		//print_r($_POST); exit();
 		$model = new CategoriesModel();
 		$id = $this->request->getPost('pk_id');
+		$businessuser_id =   $this->session->get('businessuser_id');
 		$avatar=$this->request->getFile('file');
 		$check_file =$avatar->getClientName();
 		if(!empty($check_file)){
@@ -129,16 +140,18 @@ class Categories extends BaseController
 			$data = array(
 				'name' => $this->request->getPost('name'),
 				'shortname' => $this->request->getPost('shortname'),
+				'list_order_numb' => $this->request->getPost('list_order_numb'),
+				'tags' => $this->request->getPost('tags'),
 				'bussiness_id' => $this->request->getPost('bussiness_id'),
 				'is_active' => $this->request->getPost('is_active'),
 				'description' => $this->request->getPost('description'),
 				'image_path' =>  $fullimgpath,
 				'thumbnail_path' =>  $fullimgpath,
-				'created_by' => 1,
-				'updated_by' => 1,
-				'udpated_datetime' => date('Y-m-d H:i:s')
+				'created_by' => $businessuser_id,
+				'updated_by' => $businessuser_id
 			);		
 		$save = $model->update_categories($data,$id);
-		return redirect()->route('categories');
+		businessadmin_activityLog('configuration','Categories Updated',$data);
+		return redirect()->route('Categories');
 	}
 }

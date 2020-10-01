@@ -30,51 +30,62 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Login::index');
+$routes->get('/', 'Zrortadmin/Login::index');
 //routes for logout
-$routes->get('logout', 'Login::logout');
+$routes->get('logout', 'Zrortadmin/Login::logout');
 //routes for orders
-$routes->get('orders/(:segment)', 'Orders::view/$1');
-$routes->get('orders', 'Orders::index');
-$routes->get('orders_add', 'Orders::add_orders');
-$routes->get('orders_view/(:segment)', 'Orders::view_orders/$1'); 
-$routes->get('orders_delete/(:segment)', 'Orders::delete_orders/$1');
-$routes->get('orders_edit/(:segment)', 'Orders::edit_orders/$1');
+$routes->get('Orders/(:segment)', 'Zrortadmin\Orders::view/$1');
+$routes->get('Orders', 'Zrortadmin\Orders::index');
+$routes->get('Orders-Add', 'Zrortadmin\Orders::add_orders');
+$routes->get('Orders-View/(:segment)', 'Zrortadmin\Orders::view_orders/$1'); 
+$routes->get('Orders-Delete/(:segment)', 'Zrortadmin\Orders::delete_orders/$1');
+$routes->get('Orders-Edit/(:segment)', 'Zrortadmin\Orders::edit_orders/$1');
 //routes for products
-$routes->get('products/(:segment)', 'Businessadmin/Products::view/$1');
-$routes->get('products', 'Businessadmin/Products::index'); 
-$routes->get('products_add', 'Businessadmin/Products::add_products');
-$routes->get('products_view/(:segment)', 'Businessadmin/Products::view_products/$1');
-$routes->get('products_delete/(:segment)', 'Businessadmin/Products::delete_products/$1');
-$routes->get('products_edit/(:segment)', 'Businessadmin/Products::edit_products/$1');
+$routes->get('Products/(:segment)', 'Businessadmin\Products::view/$1');
+$routes->get('Products', 'Businessadmin\Products::index'); 
+$routes->get('Products-Add', 'Businessadmin\Products::add_products');
+$routes->get('Products-View/(:segment)', 'Businessadmin\Products::view_products/$1');
+$routes->get('Products-Delete/(:segment)', 'Businessadmin\Products::delete_products/$1');
+$routes->get('Products-Edit/(:segment)', 'Businessadmin\Products::edit_products/$1');
 //routes for categories
-$routes->get('categories/(:segment)', 'Businessadmin/Categories::view/$1');
-$routes->get('categories', 'Businessadmin/Categories::index'); 
-$routes->get('categories_add', 'Businessadmin/Categories::add_categories');
-$routes->get('categories_view/(:segment)', 'Businessadmin/Categories::view_categories/$1');
-$routes->get('categories_delete/(:segment)', 'Businessadmin/Categories::delete_categories/$1');
-$routes->get('categories_edit/(:segment)', 'Businessadmin/Categories::edit_categories/$1');
+$routes->get('Categories/(:segment)', 'Businessadmin\Categories::view/$1');
+$routes->get('Categories', 'Businessadmin\Categories::index'); 
+$routes->get('Categories-Add', 'Businessadmin\Categories::add_categories');
+$routes->get('Categories-View/(:segment)', 'Businessadmin\Categories::view_categories/$1');
+$routes->get('Categories-Delete/(:segment)', 'Businessadmin\Categories::delete_categories/$1');
+$routes->get('Categories-Edit/(:segment)', 'Businessadmin\Categories::edit_categories/$1');
 //routes for business
-$routes->get('business/(:segment)', 'Zrortadmin/Business::view/$1');
-$routes->get('business', 'Zrortadmin/Business::index'); 
-$routes->get('business_add', 'Zrortadmin/Business::add_business');
-$routes->get('business_view/(:segment)', 'Zrortadmin/Business::view_business/$1');
-$routes->get('business_delete/(:segment)', 'Zrortadmin/Business::delete_business/$1');
-$routes->get('business_edit/(:segment)', 'Zrortadmin/Business::edit_business/$1');
+$routes->get('Business/(:segment)', 'Zrortadmin\Business::view/$1');
+$routes->get('Business', 'Zrortadmin\Business::index'); 
+$routes->get('Business-Add', 'Zrortadmin\Business::add_business');
+$routes->get('Business-View/(:segment)', 'Zrortadmin\Business::view_business/$1');
+$routes->get('Business-Delete/(:segment)', 'Zrortadmin\Business::delete_business/$1');
+$routes->get('Business-Edit/(:segment)', 'Zrortadmin\Business::edit_business/$1');
 //routes for productsunits
-$routes->get('productsunits/(:segment)', 'Businessadmin/Productsunits::view/$1');
-$routes->get('productsunits', 'Businessadmin/Productsunits::index'); 
-$routes->get('productsunits_add', 'Businessadmin/Productsunits::add_productsunits');
-$routes->get('productsunits_view/(:segment)', 'Businessadmin/Productsunits::view_productsunits/$1');
-$routes->get('productsunits_delete/(:segment)', 'Businessadmin/Productsunits::delete_productsunits/$1');
-$routes->get('productsunits_edit/(:segment)', 'Businessadmin/Productsunits::edit_productsunits/$1');
+$routes->get('Productsunits/(:segment)', 'Businessadmin\Productsunits::view/$1');
+$routes->get('Productsunits', 'Businessadmin\Productsunits::index'); 
+$routes->get('Productsunits-Add', 'Businessadmin\Productsunits::add_productsunits');
+$routes->get('Productsunits_View/(:segment)', 'Businessadmin\Productsunits::view_productsunits/$1');
+$routes->get('Productsunits-Delete/(:segment)', 'Businessadmin\Productsunits::delete_productsunits/$1');
+$routes->get('Productsunits-Edit/(:segment)', 'Businessadmin\Productsunits::edit_productsunits/$1');
 //routes for businesscategories
-$routes->get('businesscategories/(:segment)', 'Zrortadmin/Businesscategories::view/$1');
-$routes->get('businesscategories', 'Zrortadmin/Businesscategories::index'); 
-$routes->get('businesscategories_add', 'Zrortadmin/Businesscategories::add_businesscategories');
-$routes->get('businesscategories_view/(:segment)', 'Zrortadmin/Businesscategories::view_businesscategories/$1');
-$routes->get('businesscategories_delete/(:segment)', 'Zrortadmin/Businesscategories::delete_businesscategories/$1');
-$routes->get('businesscategories_edit/(:segment)', 'Zrortadmin/Businesscategories::edit_businesscategories/$1');
+$routes->get('Business-Categories/(:segment)', 'Zrortadmin\Businesscategories::view/$1');
+$routes->get('Business-Categories', 'Zrortadmin\Businesscategories::index'); 
+$routes->get('Business-Categories-Add', 'Zrortadmin\Businesscategories::add_businesscategories');
+$routes->get('Business-Categories-View/(:segment)', 'Zrortadmin\Businesscategories::view_businesscategories/$1');
+$routes->get('Business-Categories-Delete/(:segment)', 'Zrortadmin\Businesscategories::delete_businesscategories/$1');
+$routes->get('Business-Categories-Edit/(:segment)', 'Zrortadmin\Businesscategories::edit_businesscategories/$1'); 
+//routes for zrortprofile
+//$routes->get('zrortprofile/(:segment)', 'Zrortadmin/Zrortprofile::view/$1');
+//$routes->get('zrortprofile', 'Zrortadmin/Zrortprofile::index'); 
+$routes->get('ZrortProfile-Add', 'Zrortadmin/Zrortprofile::add_zrortprofile');
+$routes->get('ZrortChange-Password', 'Zrortadmin/Zrortprofile::update_zrortchangepassword');
+//Businessadmin
+$routes->get('Business-Login', 'Businessadmin\Login::index');
+//routes for logout
+$routes->get('logout', 'Businessadmin\Login::logout');
+$routes->get('BusinessProfile-Add', 'Businessadmin\Businessprofile::add_businessprofile');
+$routes->get('BusinessChange-Password', 'Businessadmin\Businessprofile::update_businesschangepassword');
 /**
  * --------------------------------------------------------------------
  * Additional Routing
