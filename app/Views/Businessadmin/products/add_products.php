@@ -91,7 +91,7 @@ input:checked + .slider:before {
 					<li class="breadcrumb-item active">Add Product</li>
 				</ol>
 				<div class="row">
-					<div class="col-lg-6 col-md-6">
+					<div class="col-lg-12">
 					<?php $validation = \Config\Services::validation(); ?>
 						<form class="cool-b4-form mt-5" action="<?php echo base_url();?>/Businessadmin/Products/products_save" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onSubmit="">
 							<div class="card card-static-2 mb-30">
@@ -228,13 +228,11 @@ input:checked + .slider:before {
 										<?php }?>
 										</div>
 										<div class="form-group">
-											<label class="form-label">Feature Number*</label>
-											<input type="text" class="form-control" placeholder="Feature Number" name="is_featured" required>
-										<?php if($validation->getError('is_featured')) {?>
-											<div class='alert alert-danger mt-2'>
-											  <?= $error = $validation->getError('is_featured'); ?>
-											</div>
-										<?php }?>
+											<label class="form-label">Is Feature*</label>
+											<select id="is_featured" name="is_featured" class="form-control">
+												<option selected value="1">Yes</option>
+												<option value="0">No</option>
+											</select>
 										</div>
 										<div class="form-group">
 											<label class="form-label">Product*</label>

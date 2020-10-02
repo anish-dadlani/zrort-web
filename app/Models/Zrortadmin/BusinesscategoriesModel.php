@@ -10,8 +10,8 @@ class BusinesscategoriesModel extends Model
 	{
 		if ($slug === false)
 		{
-			return $this->where(['is_active' => '1'])->orderBy('pk_id')->findAll();
-			//return $this->findAll();
+			//return $this->where(['is_active' => '1'])->orderBy('pk_id')->findAll();
+			return $this->orderBy('pk_id')->findAll();
 		}
 		return $this->asArray()->where(['pk_id' => $slug])->orderBy('pk_id')->findAll();
 	}

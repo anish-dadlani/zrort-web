@@ -27,8 +27,6 @@ class Categories extends BaseController
 	}
 	public function add_categories()
 	{
-		//$user_id =   $this->session->get('user_id');
-		//print_r($user_id); exit();
 		$business_model = new BusinessModel();
 		$data['business'] = $business_model->getBusiness();
 		$data['pageTitle'] = 'Categories Add';

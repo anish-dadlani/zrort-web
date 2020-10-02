@@ -91,7 +91,7 @@ input:checked + .slider:before {
 					<li class="breadcrumb-item active">Edit Product</li>
 				</ol>
 				<div class="row">
-					<div class="col-lg-6 col-md-6">
+					<div class="col-lg-12">
 						<form class="cool-b4-form mt-5" action="<?php echo base_url();?>/Businessadmin/Products/update_products" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onSubmit="">
 							<div class="card card-static-2 mb-30">
 								<div class="card-title-2">
@@ -164,8 +164,11 @@ input:checked + .slider:before {
 											<input type="text" class="form-control" placeholder="Order Number" name="list_order_numb" value="<?php echo  $products_edit[0]['list_order_numb']; ?>" required>
 										</div>
 										<div class="form-group">
-											<label class="form-label">Featured Number*</label>
-											<input type="text" class="form-control" placeholder="Featured Number" name="is_featured" value="<?php echo  $products_edit[0]['is_featured']; ?>" required>
+											<label class="form-label">Is Feature*</label>
+											<select id="is_featured" name="is_featured" class="form-control">
+												<option  value="1" <?php if($products_edit[0]['is_featured'] == 1 ){ echo 'selected="selected"'; } else  { echo ''; } ?>>Yes</option>
+												<option value="0" <?php if($products_edit[0]['is_featured'] == 0 ){ echo 'selected="selected"'; } else  { echo ''; } ?>>No</option>
+											</select>
 										</div>
 										<div class="form-group">
 											<label class="form-label">Tag Name*</label>

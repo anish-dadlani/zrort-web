@@ -23,7 +23,6 @@ class Business extends BaseController
 
 	public function view($slug = null)
 	{   
-	
 		$model = new BusinessModel();
 		$data['business'] = $model->getBusiness($slug);
 	}

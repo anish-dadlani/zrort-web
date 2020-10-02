@@ -64,7 +64,7 @@ class Businesscategories extends BaseController
 				'description' => $this->request->getPost('description'),
 				'is_active' => $this->request->getPost('is_active'),
 				'image_path' =>  $fullimgpath,
-				'thumbnail_path' =>  $fullimgpath,
+				'thumbnail_path' =>	$fullimgpath,
 				'created_by' => $user_id,
 				'updated_by' => $user_id 
 			);

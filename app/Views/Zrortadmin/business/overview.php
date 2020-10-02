@@ -51,7 +51,9 @@
 										<thead>
 											<tr>
 												<th class="text-center" >S#</th>
-												<th>Name</th>
+												<th>Business Name</th>
+												<th>Owner Name</th>
+												<th>Business Category</th>
 												<th style="width: 200px;">City</th>
 												<th style="width: 120px;">Status</th>
 												<th style="width: 150px;">Action</th>
@@ -62,8 +64,10 @@
 											<tr>
 												<td class="text-center" ><?php echo $i; ?> </td>
 												<td class="" ><?php echo $row['name']; ?></td>
+												<td class="" ><?php echo get_business_admin_name($row['business_admin_id']); ?></td>
+												<td class="" ><?php echo get_business_categories_name($row['business_category_id']); ?></td>
 												<td class="" ><?php echo $row['city']; ?></td>
-												<td class="" ><?php echo $row['is_active']; ?></td>
+												<td class="" ><?php if($row['is_active']==1){echo 'Active';}else{echo 'Inactive';}?></td>
 												<td class="action-btns">
 													<a href="<?php echo base_url(); ?>/Business-View/<?php echo $row['pk_id']?>" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
 													<a href="<?php echo base_url(); ?>/Business-Edit/<?php echo $row['pk_id']?>" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>

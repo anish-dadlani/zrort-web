@@ -61,7 +61,6 @@ class Products extends BaseController
 			'discount_type'  => 'required|numeric',
 			'discount_amount'  => 'required|numeric',
 			'discount_percent'  => 'required|numeric',
-			'is_featured'  => 'required|numeric',
 			'unit_price'  => 'required|numeric',
 			'tags'  => 'required|min_length[3]',
 			'list_order_numb'  => 'required|numeric',

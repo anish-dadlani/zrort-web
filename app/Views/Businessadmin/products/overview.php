@@ -53,13 +53,13 @@
 											<tr>
 												<th>S#</th>
 												<th>Title</th>
-												<th>Category</th>
+												<th>Product Type</th>
+												<th>Product Category</th>
+												<th>Product Unit</th>
+												<th>Business Type</th>
 												<th>Short Name</th>
-												<th>Thumbnail</th>
 												<th>Unit Price <span class="badge-cst">Rs</span></th>
-												<th>Active</th>
-												<th>On Promotion</th>
-												<th>Instant Product</th>
+												<th>Status</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -68,13 +68,13 @@
 											<tr>
 												<td class="text-center" ><?php echo $i; ?> </td>
 												<td class="" ><?php echo $row['name']; ?></td>
-												<td class="" ><?php echo $row['product_category_id']; ?></td>
-												<td class="" ><?php echo $row['shortname']; ?></td>
-												<td class="" ><?php echo $row['thumbnail_path']; ?></td>
-												<td class="" ><?php echo $row['unit_price']; ?></td>
-												<td class="" ><?php echo $row['is_active']; ?></td>
-												<td class="" ><?php echo $row['on_sale']; ?></td>
 												<td class="" ><?php echo $row['product_type']; ?></td>
+												<td class="" ><?php echo get_product_categories_name($row['product_category_id']); ?></td>
+												<td class="" ><?php echo get_product_unit_name($row['product_unit_id']); ?></td>
+												<td class="" ><?php echo get_business_name($row['bussiness_id']); ?></td>
+												<td class="" ><?php echo $row['shortname']; ?></td>
+												<td class="" ><?php echo $row['unit_price']; ?></td>
+												<td class="" ><?php if($row['is_active']==1){echo 'Active';}else{echo 'Inactive';}?></td>
 												<td class="action-btns">
 													<a href="<?php echo base_url(); ?>/Products-View/<?php echo $row['pk_id']?>" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
 													<a href="<?php echo base_url(); ?>/Products-Edit/<?php echo $row['pk_id']?>" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>

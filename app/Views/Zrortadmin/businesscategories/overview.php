@@ -29,8 +29,9 @@
 											<tr>
 												<th>S#</th>
 												<th>Title</th>
+												<!--<th>Thumbnail</th>-->
 												<th>Description</th>
-												<th>Active</th>
+												<th>Status</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -39,8 +40,9 @@
 											<tr>
 												<td class="text-center" ><?php echo $i; ?> </td>
 												<td class="" ><?php echo $row['title']; ?></td>
+												<!--<td class="" ><?php echo $row['thumbnail_path']; ?></td>-->
 												<td class="" ><?php echo $row['description']; ?></td>
-												<td class="" ><?php echo $row['is_active']; ?></td>
+												<td class="" ><?php if($row['is_active']==1){echo 'Active';}else{echo 'Inactive';}?></td>
 												<td class="action-btns">
 													<a href="<?php echo base_url(); ?>/Business-Categories-View/<?php echo $row['pk_id']?>" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
 													<a href="<?php echo base_url(); ?>/Business-Categories-Edit/<?php echo $row['pk_id']?>" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
