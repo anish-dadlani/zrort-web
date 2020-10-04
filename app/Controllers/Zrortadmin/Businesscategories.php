@@ -59,6 +59,26 @@ class Businesscategories extends BaseController
 			$filenname =$avatar->getClientName();
             $path  = $avatar->getTempName();
 			$fullimgpath = $path . $filenname;
+			//thumbnail
+			$paththumb='./includes/images/ZrortAdmin/businesscategories/thumbs/';
+			$files = $this->request->getFile();
+			//print_r($files); exit();
+			$image=service('image');
+			foreach($files['file'] as $file){
+				if($file->isValid() && !$file->hasMoved()){
+					$file->move($paththumb);
+					$fileName=$file->getName();
+					
+					if(!$file_exists($paththumb.'thumbs/'))
+					mkdir($paththumb.'thumbs/',755);
+				
+				$image->withFile(src($fileName))
+					->fit(150, 150, 'center')
+					->save($paththumb.'thumbs/'.$fileName);
+				}
+			}
+			//var_dump($image); exit();
+			
 			$data = array(
 				'title' => $this->request->getPost('title'),
 				'description' => $this->request->getPost('description'),
