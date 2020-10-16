@@ -42,26 +42,26 @@ class Business extends BaseController
 		$user_id =   $this->session->get('user_id');
 		if (! $this->validate([ 
 			'business_number' => 'required|numeric',
-			'name'  => 'required|alpha|min_length[3]',
-			'country'  => 'required|alpha', 
-			'state'  => 'required|alpha', 
-			'city'  => 'required|alpha', 
+			'name'  => 'required',
+			'country'  => 'required', 
+			'state'  => 'required', 
+			'city'  => 'required', 
 			'postalcode'  => 'required|numeric', 
 			'lat'  => 'required|numeric', 
 			'lang'  => 'required|numeric', 
 			'business_website'  => 'required', 
 			'business_email'  => 'required|valid_email', 
-			'business_mobile'  => 'required|numeric|max_length[10]', 
-			'business_landline'  => 'required|numeric|max_length[8]', 
+			'business_mobile'  => 'required|numeric|max_length[11]', 
+			'business_landline'  => 'required|numeric|max_length[11]', 
 			'business_address'  => 'required|min_length[5]', 
-			'status'  => 'required|alpha', 
+			'status'  => 'required', 
 			'is_active'  => 'required', 
 			'delivery_fee'  => 'required|numeric', 
 			'min_delivery_price'  => 'required|numeric', 
 			'min_delivery_time'  => 'required', 
-			'firstname'  => 'required|min_length[3]|alpha', 
-			'lastname'  => 'required|min_length[3]|alpha', 
-			'username'  => 'required|min_length[3]|alpha', 
+			'firstname'  => 'required', 
+			'lastname'  => 'required', 
+			'username'  => 'required', 
 			'password_hash'  => 'required',
 			'file' => [
                 'uploaded[file]',
@@ -175,7 +175,7 @@ class Business extends BaseController
 				'is_active'=>"0",
 				'udpated_datetime'=> date('Y-m-d h:i:s')
 		);
-		$save =$model->delete_business($id,$data);
+		$save =$model->delete_business($id);
 		zrortadmin_activityLog('configuration','Business Deleted',$data);
 		return redirect()->route('Business');
 	}

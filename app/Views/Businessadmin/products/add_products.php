@@ -287,7 +287,8 @@ input:checked + .slider:before {
 												</div>
 											</div>
 										</div>
-										<button class="save-btn hover-btn" type="submit">Add New Product</button>
+										<!--<div class="dropzone" id="myDropzone"></div>-->
+										<button class="save-btn hover-btn" id="submit-all" type="submit">Add New Product</button>
 										<a  href="<?php echo base_url(); ?>/Products" class="cancel-cst-btn">Cancel</a>
 									</div> 
 								</div>
@@ -297,3 +298,47 @@ input:checked + .slider:before {
 				</div>
 			</div>
         </main>
+	
+<!--<script type="text/javascript">
+	Dropzone.autoDiscover = false;
+	/* $(function() {
+		var async = function (func) {
+		  return function () {
+			var args = arguments;
+			setTimeout(function () {
+			  func.apply(this, args);
+			}, 0);
+		  };
+		}; */
+    //Dropzone class
+    var myDropzone = new Dropzone(".dropzone", {
+		url: '<?php echo base_url("/Businessadmin/Products/products_save"); ?>',
+		paramName: "file",
+		maxFilesize: 2,
+		maxFiles: 10,
+		acceptedFiles: "image/*,application/pdf",
+		addRemoveLinks: true,
+		autoProcessQueue: true,
+		init: function() {
+			this.on('sending', function(file, xhr, formData) {
+				// Append all form inputs to the formData Dropzone will POST
+				var data = $('#form').serializeArray();
+				$.each(data, function(key, el) {
+					formData.append(el.name, el.value);
+				});
+			});
+		},
+		  success: function(file, response)
+            {
+                //window.location="";
+            }
+		
+	});
+	  
+	$('#submit-all').click(function(){
+		myDropzone.processQueue();
+	});
+	
+	
+//});	
+	</script>	-->	

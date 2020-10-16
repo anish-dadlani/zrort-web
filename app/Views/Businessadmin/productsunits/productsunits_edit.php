@@ -42,7 +42,7 @@
 									<div class="news-content-right pd-20">
 										<div class="form-group">
 											<input type="hidden" name="pk_id" value="<?php echo  $productsunits_edit[0]['pk_id']; ?>"  />
-											<label class="form-label">Unit Tite*</label>
+											<label class="form-label">Unit Title*</label>
 											<input type="text" class="form-control" placeholder="Unit Name" name="unit_title" value="<?php echo  $productsunits_edit[0]['unit_title']; ?>">
 										</div>
 										<div class="form-group">

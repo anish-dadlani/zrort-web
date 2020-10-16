@@ -18,8 +18,8 @@ class ProductsunitsModel extends Model
 	public function productsunits_save($data) {
         $query = $this->db->table($this->table)->insert($data);
 	}
-	public function delete_productsunits($id,$data) {
-		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);
+	public function delete_productsunits($id) {
+		$query =$this->db->table($this->table)->where(['pk_id' => $id])->delete();
 	}
 	public function update_productsunits($data,$id) {
 		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);

@@ -205,7 +205,7 @@
 										</div>
 										<div class="col-lg-6 col-md-6">
 											<div class="card-title-2">
-												<h4>Add New Business</h4>
+												
 											</div>
 											<div class="card-body-table">
 												<div class="add-shop-content pd-20">

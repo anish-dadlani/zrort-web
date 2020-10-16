@@ -37,8 +37,8 @@ class Productsunits extends BaseController
 		$model = new ProductsunitsModel();
 		$user_id =   $this->session->get('user_id');
 		if (! $this->validate([
-			'unit_title' => 'required|min_length[3]',
-			'description'  => 'required|min_length[20]',
+			'unit_title' => 'required',
+			'description'  => 'required|min_length[50]',
 			'is_active'  => 'required'
 		]))
 		{
@@ -85,10 +85,10 @@ class Productsunits extends BaseController
 		//print_r($id); exit();
 		$model = new ProductsunitsModel();
 		$data = array(
-				/* 'is_active'=>"0",
-				'is_active_date'=> date('Y-m-d h:i:s') */
+				'is_active'=>"0",
+				'updated_on'=> date('Y-m-d h:i:s') 
 		);
-		$save =$model->delete_productsunits($id,$data);
+		$save =$model->delete_productsunits($id);
 		zrortadmin_activityLog('configuration','ProductsUnits Deleted',$data);
 		return redirect()->route('Productsunits');
 	}

@@ -75,7 +75,7 @@
     $('.footable').footable();
   });
 </script>
-<script type="text/javascript">
+<script type="text/javascript"> 
  $(document).ready(function(){   
     var columns = [
           { data: "serial" ,

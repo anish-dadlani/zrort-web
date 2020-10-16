@@ -18,8 +18,8 @@ class BusinessModel extends Model
 	public function business_save($data) {
         $query = $this->db->table($this->table)->insert($data);
 	}
-	public function delete_business($id,$data) {
-		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);
+	public function delete_business($id) {
+		$query =$this->db->table($this->table)->where(['pk_id' => $id])->delete();
 	}
 	public function update_business($data,$id) {
 		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);

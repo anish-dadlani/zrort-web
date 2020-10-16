@@ -41,7 +41,7 @@
 								<div class="card-body-table">
 									<div class="news-content-right pd-20">
 										<div class="form-group">
-											<label class="form-label">Unit Tite*</label>
+											<label class="form-label">Unit Title*</label>
 											<input type="text" class="form-control" placeholder="Unit Name" name="unit_title" value="<?php echo  $productsunits_view[0]['unit_title']; ?>" disabled>
 										</div>
 										<div class="form-group">

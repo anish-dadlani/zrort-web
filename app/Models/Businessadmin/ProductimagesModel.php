@@ -2,27 +2,25 @@
 
 use CodeIgniter\Model;
 
-class ProductsModel extends Model
+class ProductimagesModel extends Model
 {
-    protected $table = 'products';
+    protected $table = 'product_images';
 	
-	public function getProducts($slug = false)
+	public function getProductsimages($slug = false)
 	{
 		if ($slug === false)
 		{
-			return $this->where(['is_active' => '1'])->orderBy('pk_id')->findAll();
-			//return $this->findAll();
+			return $this->findAll();
 		}
 		return $this->asArray()->where(['pk_id' => $slug])->orderBy('pk_id')->findAll();
 	}
-	public function products_save($data) {
+	public function productsimages_save($data) {
         $query = $this->db->table($this->table)->insert($data);
-		return $this->db->insertID(); 
 	}
-	public function delete_products($id,$data) {
+	public function delete_productsimages($id,$data) {
 		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);
 	}
-	public function update_products($data,$id) {
+	public function update_productsimages($data,$id) {
 		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);
 	}
 }

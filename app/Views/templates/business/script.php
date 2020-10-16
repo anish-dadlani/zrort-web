@@ -3,6 +3,7 @@
 	<script src="<?php echo base_url('/assets/admin/vendor/chart/highcharts.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/admin/vendor/chart/exporting.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/admin/vendor/chart/export-data.js'); ?>"></script>
-	<script src="<?php echo base_url('/assets/admin/vendor/chart/accessibility-data.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/admin/vendor/chart/accessibility.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/admin/js/scripts.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/admin/js/chart.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/admin/js/dropzone.js'); ?>"></script>

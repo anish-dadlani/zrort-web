@@ -37,8 +37,8 @@ class Businesscategories extends BaseController
 		$model = new BusinesscategoriesModel();
 
 		if (! $this->validate([
-			'title' => 'required|min_length[3]',
-			'description'  => 'required|min_length[20]',
+			'title' => 'required',
+			'description'  => 'required|min_length[40]',
 			'file' => [
                 'uploaded[file]',
                 'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
@@ -60,9 +60,8 @@ class Businesscategories extends BaseController
             $path  = $avatar->getTempName();
 			$fullimgpath = $path . $filenname;
 			//thumbnail
-			$paththumb='./includes/images/ZrortAdmin/businesscategories/thumbs/';
+			/* $paththumb='./includes/images/ZrortAdmin/businesscategories/thumbs/';
 			$files = $this->request->getFile();
-			//print_r($files); exit();
 			$image=service('image');
 			foreach($files['file'] as $file){
 				if($file->isValid() && !$file->hasMoved()){
@@ -76,7 +75,7 @@ class Businesscategories extends BaseController
 					->fit(150, 150, 'center')
 					->save($paththumb.'thumbs/'.$fileName);
 				}
-			}
+			} */
 			//var_dump($image); exit();
 			
 			$data = array(
@@ -118,7 +117,7 @@ class Businesscategories extends BaseController
 				'is_active'=>"0",
 				'udpated_datetime'=> date('Y-m-d h:i:s') 
 		);
-		$save =$model->delete_businesscategories($id,$data);
+		$save =$model->delete_businesscategories($id);
 		zrortadmin_activityLog('configuration','Businesscategories Deleted',$data);
 		return redirect()->route('Business-Categories');
 	}

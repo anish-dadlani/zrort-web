@@ -18,8 +18,8 @@ class BusinesscategoriesModel extends Model
 	public function businesscategories_save($data) {
         $query = $this->db->table($this->table)->insert($data);
 	}
-	public function delete_businesscategories($id,$data) {
-		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);
+	public function delete_businesscategories($id) {
+		$query =$this->db->table($this->table)->where(['pk_id' => $id])->delete();
 	}
 	public function update_businesscategories($data,$id) {
 		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);

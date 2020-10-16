@@ -3,6 +3,7 @@ use App\Models\Businessadmin\ProductsModel;
 use App\Models\Businessadmin\CategoriesModel;
 use App\Models\Zrortadmin\BusinessModel;
 use App\Models\Businessadmin\ProductsunitsModel;
+use App\Models\Businessadmin\ProductimagesModel;
 use CodeIgniter\Controller;
 
 use App\Controllers\BaseController;
@@ -43,6 +44,7 @@ class Products extends BaseController
 	public function products_save()
 	{
 		//print_r($_POST); exit();
+		$productimages_model = new ProductimagesModel();
 		$businessuser_id =   $this->session->get('businessuser_id');
 		$favorities_numb = $this->request->getPost('favorities');
 		if($favorities_numb==1){
@@ -52,22 +54,22 @@ class Products extends BaseController
 		}
 		$model = new ProductsModel();
 		if (! $this->validate([
-			'name' => 'required|min_length[3]',
-			'description'  => 'required|min_length[20]',
-			'shortname'  => 'required|min_length[3]',
-			'product_type'  => 'required|min_length[1]',
+			'name' => 'required',
+			'description'  => 'required|min_length[40]',
+			'shortname'  => 'required',
+			'product_type'  => 'required',
 			'unit_quantity'  => 'required|numeric',
 			'on_sale'  => 'required|numeric',
 			'discount_type'  => 'required|numeric',
 			'discount_amount'  => 'required|numeric',
 			'discount_percent'  => 'required|numeric',
 			'unit_price'  => 'required|numeric',
-			'tags'  => 'required|min_length[3]',
+			'tags'  => 'required',
 			'list_order_numb'  => 'required|numeric',
-			'product_sku'  => 'required|min_length[3]',
+			'product_sku'  => 'required',
 			'file' => [
                 'uploaded[file]',
-                'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
+                'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]', 
                 'max_size[file,4096]',
             ],
 		]))
@@ -116,8 +118,32 @@ class Products extends BaseController
 				'created_by' => $businessuser_id,
 				'updated_by' => $businessuser_id
 			);
-			$save = $model->products_save($data); 
+			$lastinsertedid = $model->products_save($data); 
 			businessadmin_activityLog('configuration','Products Added',$data);
+			//dropzone code
+			/* if(!empty($_FILES)){
+				///print_r($_FILES);exit;
+				foreach($_FILES['file']['name'] as $key=>$val ){
+					//print_r($_FILES);exit;
+					$fileName = $_FILES['file']['name'][$key];
+					//print_r($fileName); exit;
+					$fileArray = explode('.', $fileName);
+					$fileExt = end($fileArray);
+					$temp = $_FILES['file']['tmp_name'][$key];
+					$dir_separator = DIRECTORY_SEPARATOR;
+					$folder = "uploads/";
+					$destination_path = $folder;
+					$target_path = $destination_path.$fileName;
+					move_uploaded_file($temp, $target_path);
+					$red_map = array(
+						'image_path' => $fileName,		   
+					);
+					$red_map["product_id"] = $lastinsertedid;
+					//print_r($red_map); exit;
+					$lastinsertedid = $productimages_model->productsimages_save($red_map); 
+				}			
+			} */
+			//end code
 			return redirect()->route('Products');
 		}
 	}

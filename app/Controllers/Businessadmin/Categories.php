@@ -40,10 +40,10 @@ class Categories extends BaseController
 		$model = new CategoriesModel();
 		$businessuser_id =   $this->session->get('businessuser_id');
 		if (! $this->validate([
-			'name' => 'required|min_length[3]',
-			'description'  => 'required|min_length[20]',
-			'shortname'  => 'required|min_length[3]',
-			'tags'  => 'required|min_length[3]',
+			'name' => 'required',
+			'description'  => 'required|min_length[40]',
+			'shortname'  => 'required',
+			'tags'  => 'required',
 			'list_order_numb'  => 'required|numeric',
 			'file' => [
                 'uploaded[file]',
