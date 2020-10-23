@@ -65,7 +65,7 @@ $routes->get('Business-Edit/(:segment)', 'Zrortadmin\Business::edit_business/$1'
 $routes->get('Productsunits/(:segment)', 'Businessadmin\Productsunits::view/$1');
 $routes->get('Productsunits', 'Businessadmin\Productsunits::index'); 
 $routes->get('Productsunits-Add', 'Businessadmin\Productsunits::add_productsunits');
-$routes->get('Productsunits_View/(:segment)', 'Businessadmin\Productsunits::view_productsunits/$1');
+$routes->get('Productsunits-View/(:segment)', 'Businessadmin\Productsunits::view_productsunits/$1');
 $routes->get('Productsunits-Delete/(:segment)', 'Businessadmin\Productsunits::delete_productsunits/$1');
 $routes->get('Productsunits-Edit/(:segment)', 'Businessadmin\Productsunits::edit_productsunits/$1');
 //routes for businesscategories

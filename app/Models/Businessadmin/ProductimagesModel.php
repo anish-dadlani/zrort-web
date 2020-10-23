@@ -17,8 +17,8 @@ class ProductimagesModel extends Model
 	public function productsimages_save($data) {
         $query = $this->db->table($this->table)->insert($data);
 	}
-	public function delete_productsimages($id,$data) {
-		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);
+	public function delete_productsimages($id) {
+		$query =$this->db->table($this->table)->where(['pk_id' => $id])->delete();
 	}
 	public function update_productsimages($data,$id) {
 		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);

@@ -24,5 +24,6 @@ class ProductsModel extends Model
 	}
 	public function update_products($data,$id) {
 		$query =$this->db->table($this->table)->where(['pk_id' => $id])->update($data);
+		return $this->db->insertID();
 	}
 }
