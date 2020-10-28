@@ -15,8 +15,13 @@ class Products extends BaseController
 	}
 	public function index()
 	{
+		$pager = \Config\Services::pager();
 		$model = new ProductsModel();
 		$displaydata['products'] = $model->getProducts();
+		$displaydata = [
+            'products' => $model->paginate(5),
+            'pager' => $model->pager
+        ];
 		$data['pageTitle'] = 'Products Listing';
 		$data['fileToLoad'] = '/Businessadmin/products/overview';
 		$data['data'] = $displaydata;
@@ -43,7 +48,6 @@ class Products extends BaseController
 	}
 	public function products_save()
 	{
-		//print_r($_POST); exit();
 		$productimages_model = new ProductimagesModel();
 		$businessuser_id =   $this->session->get('businessuser_id');
 		$favorities_numb = $this->request->getPost('favorities');
@@ -55,7 +59,7 @@ class Products extends BaseController
 		$model = new ProductsModel();
 		if (! $this->validate([
 			'name' => 'required',
-			'description'  => 'required|min_length[40]',
+			'description'  => 'required',
 			'shortname'  => 'required',
 			'product_type'  => 'required',
 			'unit_quantity'  => 'required|numeric',
@@ -88,7 +92,7 @@ class Products extends BaseController
 		}
 		else
 		{ 	
-			$avatar = $this->request->getFile('file');
+			$avatar = $this->request->getFile('file_image');
             $avatar->move('includes/images/BusinessAdmin/products/');
 			$filenname =$avatar->getClientName();
             $path  = $avatar->getTempName();
@@ -120,32 +124,32 @@ class Products extends BaseController
 			);
 			$lastinsertedid = $model->products_save($data); 
 			businessadmin_activityLog('configuration','Products Added',$data);
-			//dropzone code
-			/* if(!empty($_FILES)){
-				///print_r($_FILES);exit;
-				foreach($_FILES['file']['name'] as $key=>$val ){
-					//print_r($_FILES);exit;
-					$fileName = $_FILES['file']['name'][$key];
-					//print_r($fileName); exit;
-					$fileArray = explode('.', $fileName);
-					$fileExt = end($fileArray);
-					$temp = $_FILES['file']['tmp_name'][$key];
-					$dir_separator = DIRECTORY_SEPARATOR;
-					$folder = "uploads/";
-					$destination_path = $folder;
-					$target_path = $destination_path.$fileName;
-					move_uploaded_file($temp, $target_path);
-					$red_map = array(
-						'image_path' => $fileName,		   
-					);
-					$red_map["product_id"] = $lastinsertedid;
-					//print_r($red_map); exit;
-					$savedata = $productimages_model->productsimages_save($red_map); 
-					$data = array(
+			//dropzone
+			/* if($imagefile = $this->request->getFiles())
+			{
+			   foreach($imagefile['images'] as $img)
+			   {
+				  if ($img->isValid() && ! $img->hasMoved())
+				  {
+					   $newName = $img->getRandomName();
+					   $avatar = $this->request->getFileMultiple('images');
+					   $img->move('includes/images/BusinessAdmin/productsdropzone/');
+					   //$filenname =$avatar->getClientName();
+					  // $path  = $avatar->getTempName();
+					   $fullimgpath =  $avatar;
+					   $red_map = array(
+						'image_path' => $fullimgpath,
 						'added_date '=> date('Y-m-d h:i:s') 
-					);
-					businessadmin_activityLog('configuration','Products Images Added',$data);
-				}			
+						);
+						$red_map["product_id"] = $lastinsertedid;
+						//print_r($red_map); exit;
+						$savedata = $productimages_model->productsimages_save($red_map); 
+						$data = array(
+							'added_date '=> date('Y-m-d h:i:s') 
+						);
+						businessadmin_activityLog('configuration','Products Images Added',$data);
+				  }
+			   }
 			} */
 			//end code
 			return redirect()->route('Products');
@@ -188,7 +192,7 @@ class Products extends BaseController
 				'is_active'=>"0",
 				'udpated_datetime'=> date('Y-m-d h:i:s') 
 		);
-		$save =$model->delete_products($id,$data);
+		$save =$model->delete_products($id);
 		businessadmin_activityLog('configuration','Products Deleted',$data);
 		return redirect()->route('Products');
 	}
@@ -242,39 +246,39 @@ class Products extends BaseController
 			);
 		$lastinsertedid = $model->update_products($data,$id);
 		businessadmin_activityLog('configuration','Products Updated',$data);
-		$productimages_model->delete_productsimages($id);
+		/* $productimages_model->delete_productsimages($id);
 		$data = array(
 				'added_date '=> date('Y-m-d h:i:s') 
 		);
-		businessadmin_activityLog('configuration','Products Images Deleted',$data);
+		businessadmin_activityLog('configuration','Products Images Deleted',$data); */
 		//dropzone code
-			/* if(!empty($_FILES)){
-				///print_r($_FILES);exit;
-				foreach($_FILES['file']['name'] as $key=>$val ){
-					//print_r($_FILES);exit;
-					$fileName = $_FILES['file']['name'][$key];
-					//print_r($fileName); exit;
-					$fileArray = explode('.', $fileName);
-					$fileExt = end($fileArray);
-					$temp = $_FILES['file']['tmp_name'][$key];
-					$dir_separator = DIRECTORY_SEPARATOR;
-					$folder = "uploads/";
-					$destination_path = $folder;
-					$target_path = $destination_path.$fileName;
-					move_uploaded_file($temp, $target_path);
-					$red_map = array(
-						'image_path' => $fileName,		   
-					);
-					$red_map["product_id"] = $lastinsertedid;
-					//print_r($red_map); exit;
-					$savedata = $productimages_model->productsimages_save($red_map); 
-					$data = array(
+		/* if($imagefile = $this->request->getFiles())
+			{
+			   foreach($imagefile['images'] as $img)
+			   {
+				  if ($img->isValid() && ! $img->hasMoved())
+				  {
+					   $newName = $img->getRandomName();
+					   $avatar = $this->request->getFileMultiple('images');
+					   $img->move('includes/images/BusinessAdmin/productsdropzone/');
+					   //$filenname =$avatar->getClientName();
+					  // $path  = $avatar->getTempName();
+					   $fullimgpath =  $avatar;
+					   $red_map = array(
+						'image_path' => $fullimgpath,
 						'added_date '=> date('Y-m-d h:i:s') 
-					);
-					businessadmin_activityLog('configuration','Products Images Added',$data);
-				}			
-			} */
-			//end code
+						);
+						$red_map["product_id"] = $lastinsertedid;
+						//print_r($red_map); exit;
+						$savedata = $productimages_model->productsimages_save($red_map); 
+						$data = array(
+							'added_date '=> date('Y-m-d h:i:s') 
+						);
+						businessadmin_activityLog('configuration','Products Images Added',$data);
+				  }
+			   }
+			} */	
+		//end code
 		return redirect()->route('Products');
 	}
 }

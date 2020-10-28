@@ -11,8 +11,13 @@ class Businesscategories extends BaseController
 	}
 	public function index()
 	{
+		$pager = \Config\Services::pager();
 		$model = new BusinesscategoriesModel();
 		$displaydata['businesscategories'] = $model->getBusinesscategories();
+		$displaydata = [
+            'businesscategories' => $model->paginate(5),
+            'pager' => $model->pager
+        ];
 		$data['pageTitle'] = 'Business Categories Listing';
 		$data['fileToLoad'] = '/Zrortadmin/businesscategories/overview';
 		$data['data'] = $displaydata;

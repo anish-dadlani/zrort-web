@@ -1,3 +1,15 @@
+<style>
+li {
+  background-color: #e9ecef;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>	
 		<main>
 			<div class="container-fluid">
 				<h2 class="mt-30 page-title">Categories</h2>
@@ -79,6 +91,14 @@
 											<?php endforeach; ?>
 										</tbody>
 									</table>
+									<div class="row">
+										<div class="col-md-6">
+											<?= $pager->links() ?>
+										</div>
+										<div class="col-md-6">										
+											<?= $pager->simpleLinks() ?>
+										</div>	
+									</div>
 								</div>
 							</div>
 						</div>

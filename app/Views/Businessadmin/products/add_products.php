@@ -93,7 +93,7 @@ input:checked + .slider:before {
 				<div class="row">
 					<div class="col-lg-12">
 					<?php $validation = \Config\Services::validation(); ?>
-						<form class="cool-b4-form mt-5" action="<?php echo base_url();?>/Businessadmin/Products/products_save" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onSubmit="">
+						<form id="form"  class="cool-b4-form mt-5" action="<?php echo base_url();?>/Businessadmin/Products/products_save" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onSubmit="">
 							<div class="card card-static-2 mb-30">
 								<div class="card-title-2">
 									<h4>Add New Product</h4>
@@ -283,11 +283,14 @@ input:checked + .slider:before {
 											<label class="form-label">Product Image*</label>
 											<div class="input-group">
 												<div class="custom-file">
-													<input type="file" class="form-control" name="file" accept="image/*">
+													<input type="file" class="form-control" name="file_image" accept="image/*">
 												</div>
 											</div>
 										</div>
-										<!--<div class="dropzone" id="myDropzone"></div>-->
+										<!--<div class="dropzone" name="file" id="myDropzone"></div>-->
+										
+										<!--<div><form id="dropzone" name="file" id="myDropzone" action="/" class="dropzone" method="post" enctype="multipart/form-data"></form></div>-->
+										
 										<button class="save-btn hover-btn" id="submit-all" type="submit">Add New Product</button>
 										<a  href="<?php echo base_url(); ?>/Products" class="cancel-cst-btn">Cancel</a>
 									</div> 
@@ -299,7 +302,7 @@ input:checked + .slider:before {
 			</div>
         </main>
 	
-<!--<script type="text/javascript">
+<script type="text/javascript">
 	Dropzone.autoDiscover = false;
 	/* $(function() {
 		var async = function (func) {
@@ -338,7 +341,8 @@ input:checked + .slider:before {
 	$('#submit-all').click(function(){
 		myDropzone.processQueue();
 	});
-	
+	 
 	
 //});	
-	</script>	-->	
+
+	</script>

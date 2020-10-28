@@ -11,8 +11,13 @@ class Productsunits extends BaseController
 	}
 	public function index()
 	{
+		$pager = \Config\Services::pager();
 		$model = new ProductsunitsModel();
 		$displaydata['productsunits'] = $model->getProductsunits();
+		$displaydata = [
+            'productsunits' => $model->paginate(5),
+            'pager' => $model->pager
+        ];
 		$data['pageTitle'] = 'Products Units Listing';
 		$data['fileToLoad'] = '/Businessadmin/productsunits/overview';
 		$data['data'] = $displaydata;

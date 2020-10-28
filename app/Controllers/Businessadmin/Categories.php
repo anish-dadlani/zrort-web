@@ -12,8 +12,13 @@ class Categories extends BaseController
 	}
 	public function index()
 	{
+		$pager = \Config\Services::pager();
 		$model = new CategoriesModel();
 		$displaydata['categories'] = $model->getCategories();
+		$displaydata = [
+            'categories' => $model->paginate(5),
+            'pager' => $model->pager
+        ];
 		$data['pageTitle'] = 'Categories Listing';
 		$data['fileToLoad'] = '/Businessadmin/categories/overview';
 		$data['data'] = $displaydata;
@@ -114,8 +119,8 @@ class Categories extends BaseController
 				'is_active'=>"0",
 				'udpated_datetime'=> date('Y-m-d h:i:s') 
 		);
-		$save =$model->delete_categories($id,$data);
-		businessadmin_activityLog('configuration','Categories Deleted',$data);
+		$save =$model->delete_categories($id);
+		businessadmin_activityLog('configuration','Categories Deleted',$data); 
 		return redirect()->route('Categories');
 	}
 	public function update_categories()
