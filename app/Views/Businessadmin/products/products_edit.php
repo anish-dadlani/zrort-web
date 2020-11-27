@@ -209,7 +209,7 @@ input:checked + .slider:before {
 											<label class="form-label">Product Image*</label>
 											<div class="input-group">
 												<div class="custom-file">
-													<input type="file" class="form-control" name="file" accept="image/*">
+													<input type="file" class="form-control" name="file_image" accept="image/*">
 												</div>
 											</div>
 										</div>

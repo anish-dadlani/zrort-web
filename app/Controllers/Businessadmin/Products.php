@@ -208,10 +208,10 @@ class Products extends BaseController
 		}else{
 			$favorities=0;
 		}
-		$avatar=$this->request->getFile('file');
+		$avatar=$this->request->getFile('file_image');
 		$check_file =$avatar->getClientName();
 		if(!empty($check_file)){
-			$avatar = $this->request->getFile('file');
+			$avatar = $this->request->getFile('file_image');
 			$avatar->move('includes/images/BusinessAdmin/products/');
 			$filenname =$avatar->getClientName();
 			$path  = $avatar->getTempName();

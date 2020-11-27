@@ -86,6 +86,10 @@ $routes->get('Business-Login', 'Businessadmin\Login::index');
 $routes->get('logout', 'Businessadmin\Login::logout');
 $routes->get('BusinessProfile-Add', 'Businessadmin\Businessprofile::add_businessprofile');
 $routes->get('BusinessChange-Password', 'Businessadmin\Businessprofile::update_businesschangepassword');
+//routing for frontend view
+$routes->get('Business-Listing/(:segment)', 'Frontend\Businessview::view/$1');
+$routes->get('Business-Listing', 'Frontend\Businessview::index');  
+$routes->get('Business-View/(:segment)', 'Frontend\Businessview::view_business/$1');
 /**
  * --------------------------------------------------------------------
  * Additional Routing
