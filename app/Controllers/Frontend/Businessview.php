@@ -11,6 +11,7 @@ class Businessview extends BaseController
 	{
 		helper('zarorat_functions_helper'); 
 	}
+	
 	public function index()
 	{
 		$pager = \Config\Services::pager();

@@ -3,7 +3,7 @@
 use CodeIgniter\Model;
 
 class BusinessprofileModel extends Model
-{
+{//
     protected $table = 'business_admins';
 	
 	public function getBusinessprofile($slug = false)

@@ -11,6 +11,7 @@
             </div>
         </div>
 		<?php echo view ('/templates/admin/script'); ?>
+		<?php echo view('/templates/javascript'); ?>
 		<!-- Javascripts -->
 	
 	</body>

@@ -3,7 +3,6 @@ use App\Models\Zrortadmin\BusinessModel;
 use App\Models\Zrortadmin\BusinessadminsModel;
 use App\Models\Zrortadmin\BusinesscategoriesModel;
 use CodeIgniter\Controller;
-
 use App\Controllers\BaseController;
 class Business extends BaseController
 {
@@ -11,14 +10,15 @@ class Business extends BaseController
 	{
 		helper('zarorat_functions_helper'); 
 	}
+
 	public function index()
 	{
 		$pager = \Config\Services::pager();
-		$model = new BusinessModel();
-		$displaydata['business'] = $model->getBusiness();
+		$business_model = new BusinessModel();
+		$displaydata['business'] = $business_model->getBusiness();
 		$displaydata = [
-            'business' => $model->paginate(5),
-            'pager' => $model->pager
+            'business' => $business_model->paginate(5),
+            'pager' => $business_model->pager
         ];
 		$data['pageTitle'] = 'Business Listing';
 		$data['fileToLoad'] = '/Zrortadmin/business/overview';
@@ -31,6 +31,7 @@ class Business extends BaseController
 		$model = new BusinessModel();
 		$data['business'] = $model->getBusiness($slug);
 	}
+
 	public function add_business()
 	{
 		$businesscategories_model = new BusinesscategoriesModel();
@@ -40,8 +41,10 @@ class Business extends BaseController
 		$data['data'] = $data;
 		echo view('templates/admin/zarorat_template', $data);
 	}
+	
 	public function business_save()
-	{
+	{	
+		//echo '<pre>'; print_r($_REQUEST); exit();
 		$model = new BusinessModel();
 		$businessadmins_model = new BusinessadminsModel();
 		$user_id =   $this->session->get('user_id');
@@ -72,16 +75,21 @@ class Business extends BaseController
                 'uploaded[file]',
                 'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
                 'max_size[file,4096]',
+			],
+			'logofile' => [
+                'uploaded[file]',
+                'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
+                'max_size[file,4096]',
             ],
 		]))
 		{   
-			$businesscategories_model = new BusinesscategoriesModel();
-			$data['get_businesscategories'] = $businesscategories_model->getBusinesscategories();
-			$data['pageTitle'] = 'Business Add';
-			$data['fileToLoad'] = '/Zrortadmin/business/add_business';
-			$data['data'] = $data;
-			echo view('templates/admin/zarorat_template', $data);
-
+			// $businesscategories_model = new BusinesscategoriesModel();
+			// $data['get_businesscategories'] = $businesscategories_model->getBusinesscategories();
+			// $data['pageTitle'] = 'Business Add';
+			// $data['fileToLoad'] = '/Zrortadmin/business/add_business';
+			// $data['data'] = $data;
+			return redirect()->to('/Business-Add')->withInput();
+			// echo view('templates/admin/zarorat_template', $data);
 		}
 		else
 		{	
@@ -94,7 +102,7 @@ class Business extends BaseController
 			//business_logo
 			$avatar_logo = $this->request->getFile('logofile');
             $avatar_logo->move('includes/images/ZrortAdmin/businessproductslogo/');
-			$logoname =$avatar_logo->getClientName();
+			$logoname = $avatar_logo->getClientName();
             $path_logo  = $avatar_logo->getTempName();
 			$business_logo = $path_logo . $logoname;
 			
@@ -111,7 +119,7 @@ class Business extends BaseController
 				'updated_by' =>  $user_id
 			); 
 			$business_admin_id = $businessadmins_model->businessadmins_save($business_admin_data); 
-			zrortadmin_activityLog('configuration','BusinessAdmin Added',$business_admin_data);;
+			zrortadmin_activityLog('configuration','Business Admin Added',$business_admin_data);;
 			$business_data = array(
 				'business_number' => $this->request->getPost('business_number'),
 				'name' => $this->request->getPost('name'),
@@ -145,6 +153,7 @@ class Business extends BaseController
 			return redirect()->route('Business');
 		}
 	}
+
 	public function view_business($id=null)
 	{ 
 		$model = new BusinessModel();
@@ -159,6 +168,7 @@ class Business extends BaseController
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
+
 	public function edit_business($id=null)
 	{ 
 		$model = new BusinessModel();

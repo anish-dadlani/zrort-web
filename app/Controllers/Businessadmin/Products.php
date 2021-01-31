@@ -13,6 +13,7 @@ class Products extends BaseController
 	{
 		helper('business_function_helper');
 	}
+
 	public function index()
 	{
 		$pager = \Config\Services::pager();
@@ -21,7 +22,8 @@ class Products extends BaseController
 		$displaydata = [
             'products' => $model->paginate(5),
             'pager' => $model->pager
-        ];
+		];
+		//print_r($displaydata); exit; 
 		$data['pageTitle'] = 'Products Listing';
 		$data['fileToLoad'] = '/Businessadmin/products/overview';
 		$data['data'] = $displaydata;
@@ -33,6 +35,7 @@ class Products extends BaseController
 		$model = new ProductsModel();
 		$data['products'] = $model->getProducts($slug);
 	}
+
 	public function add_products()
 	{
 		$categoriesmodel = new CategoriesModel();
@@ -46,6 +49,7 @@ class Products extends BaseController
 		$data['data'] = $data;
 		echo view('templates/business/business_template', $data);
 	}
+
 	public function products_save()
 	{
 		$productimages_model = new ProductimagesModel();
@@ -78,16 +82,17 @@ class Products extends BaseController
             ],
 		]))
 		{
-			$categoriesmodel = new CategoriesModel();
-			$data['get_categories'] = $categoriesmodel->getCategories();
-			$business_model = new BusinessModel();
-			$data['business'] = $business_model->getBusiness();
-			$productsunits_model = new ProductsunitsModel();
-			$data['get_productsunits'] = $productsunits_model->getProductsunits();
-			$data['pageTitle'] = 'Products Add';
-			$data['fileToLoad'] = '/Businessadmin/products/add_products';
-			$data['data'] = $data;
-			echo view('templates/business/business_template', $data);
+			// $categoriesmodel = new CategoriesModel();
+			// $data['get_categories'] = $categoriesmodel->getCategories();
+			// $business_model = new BusinessModel();
+			// $data['business'] = $business_model->getBusiness();
+			// $productsunits_model = new ProductsunitsModel();
+			// $data['get_productsunits'] = $productsunits_model->getProductsunits();
+			// $data['pageTitle'] = 'Products Add';
+			// $data['fileToLoad'] = '/Businessadmin/products/add_products';
+			// $data['data'] = $data;
+			// echo view('templates/business/business_template', $data);
+			return redirect()->to('/Products-Add')->withInput();
 
 		}
 		else
@@ -155,6 +160,7 @@ class Products extends BaseController
 			return redirect()->route('Products');
 		}
 	}
+
 	public function view_products($id=null)
 	{ 
 		$model = new ProductsModel();
@@ -170,6 +176,7 @@ class Products extends BaseController
 		$data['data'] = $displaydata;
 		echo view('templates/business/business_template', $data);
 	}
+
 	public function edit_products($id=null)
 	{ 
 		$model = new ProductsModel();
@@ -185,6 +192,7 @@ class Products extends BaseController
 		$data['data'] = $displaydata;
 		echo view('templates/business/business_template', $data);
 	}
+
 	public function delete_products($id=null)
 	{
 		$model = new ProductsModel();
@@ -196,6 +204,7 @@ class Products extends BaseController
 		businessadmin_activityLog('configuration','Products Deleted',$data);
 		return redirect()->route('Products');
 	}
+	
 	public function update_products()
 	{
 		$model = new ProductsModel();

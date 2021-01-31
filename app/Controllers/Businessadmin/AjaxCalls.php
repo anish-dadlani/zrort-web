@@ -12,6 +12,7 @@ class AjaxCalls extends BaseController
 		$data = $model-> categories_list_filter($is_active);
 		echo $data;
 	}
+	
 	public function product_list_filter(){
 		helper('business_function_helper'); 
 		$is_active = $this->request->getPost('is_active');

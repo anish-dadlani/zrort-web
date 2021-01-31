@@ -43,12 +43,14 @@ class LoginModel extends Model
 			return 0;
 		}
 	}
+
 	public function  update_authenticate_user($user_id){
 		$data = array(
 			'logout_time'=> date('Y-m-d H:i:s')
 		);
 		$query =$this->db->table('zrort_admin_login_log')->where(['admin_id' => $user_id])->update($data);
 	} 
+	
 	public function browser() {
 		$user_agent = $_SERVER['HTTP_USER_AGENT'];
 		$browsers = array('Chrome' => array('Google Chrome', 'Chrome/(.*)\s'), 'MSIE' => array('Internet Explorer', 'MSIE\s([0-9\.]*)'), 'Firefox' => array('Firefox', 'Firefox/([0-9\.]*)'), 'Safari' => array('Safari', 'Version/([0-9\.]*)'), 'Opera' => array('Opera', 'Version/([0-9\.]*)'));

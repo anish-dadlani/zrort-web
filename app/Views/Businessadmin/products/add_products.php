@@ -102,7 +102,7 @@ input:checked + .slider:before {
 									<div class="news-content-right pd-20">
 										<div class="form-group">
 											<label class="form-label">Name*</label>
-											<input type="text" class="form-control" placeholder="Product Name" name="name" required>
+											<input type="text" class="form-control" placeholder="Product Name" name="name" value="<?= old('name') ?>" required>
 										<?php if($validation->getError('name')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('name'); ?>
@@ -111,7 +111,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 												<label class="form-label">Short Name*</label>
-												<input type="text" class="form-control" placeholder="Short Name" name="shortname" required>
+												<input type="text" class="form-control" placeholder="Short Name" name="shortname" value="<?= old('shortname') ?>" required>
 										<?php if($validation->getError('shortname')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('shortname'); ?>
@@ -122,7 +122,7 @@ input:checked + .slider:before {
 												<label class="form-label">Description*</label>
 												<div class="card card-editor">
 													<div class="content-editor">
-														<textarea class="text-control" placeholder="Enter Description" name="description" required></textarea>
+														<textarea class="text-control" placeholder="Enter Description" name="description" value="<?= old('description') ?>" required></textarea>
 													</div>
 												</div>
 										<?php if($validation->getError('description')) {?>
@@ -133,7 +133,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Quantity*</label>
-											<input type="text" class="form-control" placeholder="PKR0" name="unit_quantity" required>
+											<input type="text" class="form-control numberclass" placeholder="Quantity" name="unit_quantity" value="<?= old('unit_quantity') ?>" required>
 										<?php if($validation->getError('unit_quantity')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('unit_quantity'); ?>
@@ -142,7 +142,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Product Type*</label>
-											<input type="text" class="form-control" placeholder="Product Type" name="product_type" required>
+											<input type="text" class="form-control" placeholder="Product Type" name="product_type" value="<?= old('product_type') ?>" required>
 										<?php if($validation->getError('product_type')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('product_type'); ?>
@@ -151,7 +151,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Sale*</label>
-											<input type="text" class="form-control" placeholder="Sale" name="on_sale" required>
+											<input type="text" class="form-control numberclass" placeholder="Sale" name="on_sale" value="<?= old('on_sale') ?>" required>
 										<?php if($validation->getError('on_sale')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('on_sale'); ?>
@@ -160,7 +160,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Discount MRP*</label>
-											<input type="text" class="form-control" placeholder="PKR0" name="discount_type" required>
+											<input type="text" class="form-control" placeholder="PKR0" name="discount_type" value="<?= old('discount_type') ?>" required>
 										<?php if($validation->getError('discount_type')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('discount_type'); ?>
@@ -169,7 +169,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Discount Amount*</label>
-											<input type="text" class="form-control" placeholder="PKR0" name="discount_amount" required>
+											<input type="text" class="form-control numberclass" placeholder="PKR0" name="discount_amount" value="<?= old('discount_amount') ?>" required>
 										<?php if($validation->getError('discount_amount')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('discount_amount'); ?>
@@ -178,7 +178,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Discount Percent*</label>
-											<input type="text" class="form-control" placeholder="Percent" name="discount_percent" required>
+											<input type="text" class="form-control numberclass" placeholder="Percent" name="discount_percent" value="<?= old('discount_percent') ?>" required>
 										<?php if($validation->getError('discount_percent')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('discount_percent'); ?>
@@ -187,7 +187,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Unit Price*</label>
-											<input type="text" class="form-control" placeholder="PKR0" name="unit_price" required>
+											<input type="text" class="form-control numberclass" placeholder="PKR0" name="unit_price" value="<?= old('unit_price') ?>" required>
 										<?php if($validation->getError('unit_price')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('unit_price'); ?>
@@ -211,7 +211,7 @@ input:checked + .slider:before {
 										</div>	
 										<div class="form-group">
 											<label class="form-label">Order Number*</label>
-											<input type="text" class="form-control" placeholder="Order Number" name="list_order_numb" required>
+											<input type="text" class="form-control numberclass" placeholder="Order Number" name="list_order_numb" value="<?= old('list_order_numb') ?>" required>
 										<?php if($validation->getError('list_order_numb')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('list_order_numb'); ?>
@@ -220,7 +220,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Tag Name*</label>
-											<input type="text" class="form-control" placeholder="Tag Name" name="tags" required>
+											<input type="text" class="form-control" placeholder="Tag Name" name="tags" value="<?= old('tags') ?>" required>
 										<?php if($validation->getError('tags')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('tags'); ?>
@@ -236,7 +236,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="form-group">
 											<label class="form-label">Product*</label>
-											<input type="text" class="form-control" placeholder="Enter Product" name="product_sku" required>
+											<input type="text" class="form-control" placeholder="Enter Product" name="product_sku" value="<?= old('product_sku') ?>" required>
 										<?php if($validation->getError('product_sku')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('product_sku'); ?>
@@ -246,37 +246,28 @@ input:checked + .slider:before {
 										<div class="form-group">
 											<label class="form-label">Product Category*</label>
 											<select id="status" name="product_category_id" class="form-control" required>
-												<option value="" >--Select--</option>
-												<?php
-												foreach($get_categories as $row)
-												{
+												<option value="" >--Select Category--</option>
+												<?php foreach($get_categories as $row){
 													echo '<option value="'.$row['pk_id'].'">'.$row['name'].'</option>';
-												}
-												?>
+												}?>
 											</select>
 										</div>
 										<div class="form-group">
 											<label class="form-label">Product Unit*</label>
 											<select id="status" name="product_unit_id" class="form-control" required>
-												<option value="" >--Select--</option>
-												<?php
-												foreach($get_productsunits as $row)
-												{
+												<option value="" >--Select Product Unit--</option>
+												<?php foreach($get_productsunits as $row){
 													echo '<option value="'.$row['pk_id'].'">'.$row['unit_title'].'</option>';
-												}
-												?>
+												}?>
 											</select>
 										</div>
 										<div class="form-group">
 											<label class="form-label">Business Type*</label>
 											<select id="status" name="bussiness_id" class="form-control" required>
-												<option value="" >--Select--</option>
-												<?php
-												foreach($business as $row)
-												{
+												<option value="" >--Select Business Type--</option>
+												<?php foreach($business as $row) {
 													echo '<option value="'.$row['pk_id'].'">'.$row['name'].'</option>';
-												}
-												?>
+												} ?>
 											</select>
 										</div>
 										<div class="form-group">
@@ -286,6 +277,11 @@ input:checked + .slider:before {
 													<input type="file" class="form-control" name="file_image" accept="image/*">
 												</div>
 											</div>
+											<?php if($validation->getError('file_image')) {?>
+											<div class='alert alert-danger mt-2'>
+											  <?= $error = $validation->getError('file_image'); ?>
+											</div>
+										<?php }?>
 										</div>
 										<!--<div class="dropzone" name="file" id="myDropzone"></div>-->
 										

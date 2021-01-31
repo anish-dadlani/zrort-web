@@ -47,7 +47,7 @@
 										<div class="add-shop-content pd-20">
 											<div class="form-group">
 												<label class="form-label">Business Number*</label>
-												<input type="text" class="form-control" placeholder="Business Number"  name="business_number" value="<?php echo  $business_edit[0]['business_number']; ?>" required>
+												<input type="text" class="form-control numberclass" placeholder="Business Number"  name="business_number" value="<?php echo  $business_edit[0]['business_number']; ?>" required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Name*</label>
@@ -67,7 +67,7 @@
 											</div>
 											<div class="form-group">
 												<label class="form-label">Postal Code*</label>
-												<input type="text" class="form-control" placeholder="Postal Code"  name="postalcode"  value="<?php echo  $business_edit[0]['postalcode']; ?>" required>
+												<input type="text" class="form-control numberclass" placeholder="Postal Code"  name="postalcode"  value="<?php echo  $business_edit[0]['postalcode']; ?>" required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Business Category*</label>
@@ -80,15 +80,15 @@
 											</div>
 											<div class="form-group">
 												<label class="form-label">Delivery Charge*</label>
-												<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" placeholder="$0" name="delivery_fee" value="<?php echo  $business_edit[0]['delivery_fee']; ?>" required>
+												<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control numberclass" placeholder="$0" name="delivery_fee" value="<?php echo  $business_edit[0]['delivery_fee']; ?>" required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Latitude*</label>
-												<input type="text" class="form-control" placeholder="0" name="lat" value="<?php echo  $business_edit[0]['lat']; ?>" required>
+												<input type="text" class="form-control numberclass" placeholder="0" name="lat" value="<?php echo  $business_edit[0]['lat']; ?>" required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Longitude*</label>
-												<input type="text" class="form-control" placeholder="0" name="lang" value="<?php echo  $business_edit[0]['lang']; ?>" required>
+												<input type="text" class="form-control numberclass" placeholder="0" name="lang" value="<?php echo  $business_edit[0]['lang']; ?>" required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Current Status*</label>
@@ -161,7 +161,7 @@
 										<div class="add-shop-content pd-20">
 											<div class="form-group">
 												<label class="form-label">Delivery Price*</label>
-												<input type="number"  class="form-control" placeholder="Enter Price" name="min_delivery_price" value="<?php echo  $business_edit[0]['min_delivery_price']; ?>"  required>
+												<input type="number"  class="form-control numberclass" placeholder="Enter Price" name="min_delivery_price" value="<?php echo  $business_edit[0]['min_delivery_price']; ?>"  required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Delivery Time*</label>
@@ -193,11 +193,11 @@
 											</div>
 											<div class="form-group">
 												<label class="form-label">Mobile Number*</label>
-												<input class="form-control" type="text" placeholder="Enter Mobile Number" name="business_mobile" value="<?php echo  $business_edit[0]['business_mobile']; ?>"  required>
+												<input class="form-control numberclass" type="text" placeholder="Enter Mobile Number" name="business_mobile" value="<?php echo  $business_edit[0]['business_mobile']; ?>"  required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Phone Number*</label>
-												<input class="form-control" type="text" placeholder="Enter Phone Number" name="business_landline" value="<?php echo  $business_edit[0]['business_landline']; ?>"  required>
+												<input class="form-control numberclass" type="text" placeholder="Enter Phone Number" name="business_landline" value="<?php echo  $business_edit[0]['business_landline']; ?>"  required>
 											</div>
 											<div class="form-group">
 												<label class="form-label">Password*</label>
@@ -222,3 +222,33 @@
 		</div>
 	</div>
 </main>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+$('.numberclass').keydown(function(e){
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || // Allow: Ctrl+A, Command+A
+        (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) || // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {// let it happen, don't do anything
+            return;
+    }
+            // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+            // $(this).val('0');
+        $(this).select();
+    }
+});
+
+$(document).on('keydown','.numberclass',function(e){
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || // Allow: Ctrl+A, Command+A
+        (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) || // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {// let it happen, don't do anything
+            return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+            // $(this).val('0');
+        $(this).select();
+    }
+});</script>

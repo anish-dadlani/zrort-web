@@ -43,7 +43,7 @@
 									<div class="news-content-right pd-20">
 										<div class="form-group">
 											<label class="form-label">Unit Title*</label>
-											<input type="text" class="form-control" placeholder="Unit Name" name="unit_title" required>
+											<input type="text" class="form-control" placeholder="Unit Name" name="unit_title" value="<?= old('unit_title'); ?>" required>
 										<?php if($validation->getError('unit_title')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('unit_title'); ?>
@@ -54,7 +54,7 @@
 												<label class="form-label">Description*</label>
 												<div class="card card-editor">
 													<div class="content-editor">
-														<textarea class="text-control" placeholder="Enter Description" name="description" required></textarea>
+														<textarea class="text-control" placeholder="Enter Description" name="description" required><?= old('description'); ?></textarea>
 													</div>
 												</div>
 										<?php if($validation->getError('description')) {?>

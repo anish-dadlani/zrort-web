@@ -43,7 +43,7 @@
 									<div class="news-content-right pd-20">
 										<div class="form-group">
 											<label class="form-label">Name*</label>
-											<input type="text" class="form-control" placeholder="Category Name" name="name" required>
+											<input type="text" class="form-control" placeholder="Category Name" name="name" value="<?= old('name') ?>" required>
 										<?php if($validation->getError('name')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('name'); ?>
@@ -52,7 +52,7 @@
 										</div>
 										<div class="form-group">
 											<label class="form-label">Short Name*</label>
-											<input type="text" class="form-control" placeholder="Short Name" name="shortname" required>
+											<input type="text" class="form-control" placeholder="Short Name" name="shortname" value="<?= old('shortname') ?>" required>
 										<?php if($validation->getError('shortname')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('shortname'); ?>
@@ -61,7 +61,7 @@
 										</div>
 										<div class="form-group">
 											<label class="form-label">Order Number*</label>
-											<input type="text" class="form-control" placeholder="Order Number" name="list_order_numb" required>
+											<input type="text" class="form-control" placeholder="Order Number" name="list_order_numb" value="<?= old('list_order_numb') ?>" required>
 										<?php if($validation->getError('list_order_numb')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('list_order_numb'); ?>
@@ -70,7 +70,7 @@
 										</div>
 										<div class="form-group">
 											<label class="form-label">Tag Name*</label>
-											<input type="text" class="form-control" placeholder="Tag Name" name="tags" required>
+											<input type="text" class="form-control" placeholder="Tag Name" name="tags" value="<?= old('tags') ?>" required>
 										<?php if($validation->getError('tags')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('tags'); ?>
@@ -81,12 +81,9 @@
 											<label class="form-label">Business Type*</label>
 											<select id="status" name="bussiness_id" class="form-control" required>
 												<option value="" >--Select--</option>
-												<?php
-												foreach($business as $row)
-												{
+												<?php foreach($business as $row) {
 													echo '<option value="'.$row['pk_id'].'">'.$row['name'].'</option>';
-												}
-												?>
+												}?>
 											</select>
 										</div>
 										<div class="form-group">
@@ -100,7 +97,7 @@
 											<label class="form-label">Description*</label>
 											<div class="card card-editor">
 												<div class="content-editor">
-													<textarea class="text-control" placeholder="Enter Description" name="description" required></textarea>
+													<textarea class="text-control" placeholder="Enter Description" name="description" required><?= old('description') ?></textarea>
 												</div>
 											</div>
 											<?php if($validation->getError('description')) {?>
@@ -116,6 +113,11 @@
 													<input type="file" class="form-control" name="file" accept="image/*">
 												</div>
 											</div>
+											<?php if($validation->getError('file')) {?>
+												<div class='alert alert-danger mt-2'>
+												  <?= $error = $validation->getError('file'); ?>
+												</div>
+											<?php }?>
 										</div>
 										<button class="save-btn hover-btn" type="submit">Add New Category</button>
 										<a href="<?php echo base_url(); ?>/Categories" class="cancel-cst-btn">Cancel</a>

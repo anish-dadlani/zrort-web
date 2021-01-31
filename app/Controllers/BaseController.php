@@ -15,6 +15,7 @@ namespace App\Controllers;
  */
 
 use CodeIgniter\Controller;
+use Config\Database;
 use Config\Services;
 
 class BaseController extends Controller
@@ -27,8 +28,10 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['form'];
 	protected $session;
+	protected $db;
+	protected $validation;
 
 	/**
 	 * Constructor.
@@ -44,7 +47,7 @@ class BaseController extends Controller
 		// E.g.:
 		// $this->session = \Config\Services::session();
 		//$this->session = Services::session();
-		$this -> db = \Config\Database::connect();
+		
 		if (session_status() == PHP_SESSION_NONE)
 		{
 			//echo PHP_SESSION_NONE;
@@ -52,13 +55,11 @@ class BaseController extends Controller
 			$this -> session = \Config\Services::session();
 			//echo session_status(); exit();
 		}
+		$this -> session = Services::session();
 		//Initialize Validation Class /
 		$this -> validation = \Config\Services::validation();
 		// Initialize Database Class /
-		
-		
-		
-		
+		$this -> db = \Config\Database::connect();	
 	}
 
 }

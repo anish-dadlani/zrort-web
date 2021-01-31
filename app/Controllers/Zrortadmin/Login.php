@@ -6,13 +6,10 @@ use App\Controllers\BaseController;
 class Login extends BaseController
 {
 	public function index(){
-		//print_r($this->session); //exit();
 		if($this->session->get('UserAuth') == 'Yes' && $this->session->get('role')> 0){
-			//echo 'ab'; exit(); 
 			return redirect()->route('Orders');
 			//return redirect()->to(base_url().'/'.$this->session->get('basePath'));
-		}else{ //echo $this->session(); exit();
-			//echo 'a'; exit(); 
+		}else{ 
 			echo view('Zrortadmin/zrortlogin/login');
 		}
 	}
@@ -23,24 +20,23 @@ class Login extends BaseController
 		$password = $this->request->getPost('password');
 		$curr_date = date("Y-m-d");
 		//$ip = $_SERVER['REMOTE_ADDR'];
-		//$this -> session -> expire = time() + (120 * 120);
+		$this -> session -> expire = time() + (120 * 120);
 		$row = $model -> authenticate_user($username, $password);
-		$row=$row[0];
-		//print_r($row); exit();
+		// $row=$row[0];
+		// print_r($row); exit();
 		if($row > 0){
 			$sessionData = array(
-				'userLevel' => $row['is_super_admin'],
-				//'logid' 	=> $row['user_id'],
-				'username'  => $row['username'],
-				'user_id' 	=> $row['pk_id'],
+				'userLevel' => $row[0]['is_super_admin'],
+				//'logid' 	=> $row[0]['user_id'],
+				'username'  => $row[0]['username'],
+				'user_id' 	=> $row[0]['pk_id'],
 				'UserAuth'  => 'Yes',
-				'role' => $row['role_id']
+				'role' => $row[0]['role_id']
 			);
-			//print_r($sessionData); exit();
 			$this->session-> set($sessionData);
-			//print_r($this->session);
 			return redirect()->to(base_url())->with('msg', 'Logged in Successful');
-		}else{
+		}
+		else{
 			return redirect()->to(base_url())->with('message', 'Wrong Credentials! Try Again');
 		}
 	}

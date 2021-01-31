@@ -25,7 +25,7 @@ if(!function_exists('businessadmin_activityLog')){
 if(!function_exists('get_business_name')){
 	function get_business_name($pk_id="")
 	{  
-		$db      = \Config\Database::connect();
+		$db    = \Config\Database::connect();
 		$query = $db->query("SELECT name FROM business where pk_id=$pk_id");
 		$business_name= $query->getRowArray();
 		return $business_name['name'];
@@ -34,7 +34,7 @@ if(!function_exists('get_business_name')){
 if(!function_exists('get_product_categories_name')){
 	function get_product_categories_name($pk_id="")
 	{  
-		$db      = \Config\Database::connect();
+		$db    = \Config\Database::connect();
 		$query = $db->query("SELECT name FROM product_categories where pk_id=$pk_id");
 		$product_categories= $query->getRowArray();
 		return $product_categories['name'];
@@ -42,11 +42,142 @@ if(!function_exists('get_product_categories_name')){
 }
 if(!function_exists('get_product_unit_name')){
 	function get_product_unit_name($pk_id="")
-	{  
-		$db      = \Config\Database::connect();
+	{  //print_r($pk_id); exit;
+		$db    = \Config\Database::connect();
 		$query = $db->query("SELECT unit_title FROM products_units where pk_id=$pk_id");
 		$product_unit= $query->getRowArray();
+		// print_r($product_unit['unit_title']); exit;
 		return $product_unit['unit_title'];
+	}
+}
+
+if(!function_exists('get_product_name')){
+	function get_product_name($pk_id="")
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT name FROM products where pk_id=$pk_id");
+		$product= $query->getRowArray();
+		return $product['name'];
+	}
+}
+
+if(!function_exists('get_category_name_by_product_id')){
+	function get_category_name_by_product_id($pk_id="")
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT pc.name as name FROM product_categories pc
+		inner join products p on pc.pk_id = p.product_category_id where p.pk_id=$pk_id");
+		$product= $query->getRowArray();
+		return $product['name'];
+	}
+}
+
+if(!function_exists('get_business_name_by_product_id')){
+	function get_business_name_by_product_id($pk_id="")
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT b.name as name FROM business b
+		inner join products p on b.pk_id = p.bussiness_id where p.pk_id=$pk_id");
+		$product= $query->getRowArray();
+		return $product['name'];
+	}
+}
+
+if(!function_exists('get_product_unit_by_product_id')){
+	function get_product_unit_by_product_id($pk_id="")
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT b.unit_title as unit_title FROM products_units b
+		inner join products p on b.pk_id = p.product_unit_id where p.pk_id=$pk_id");
+		$product= $query->getRowArray();
+		return $product['unit_title'];
+	}
+}
+
+if(!function_exists('get_customer_favorities')){
+	function get_customer_favorities()
+	{  
+		$db    = \Config\Database::connect();
+		$id = $_SESSION['user_id'];
+		$query = $db->query("SELECT b.pk_id , p.name, p.unit_price, p.image_path FROM customer_favourities b
+		inner join products p on b.product_id = p.pk_id where b.customer_id=$id");
+		$favorities['items'] = $query->getRowArray();
+		return $favorities;
+	}
+}
+
+if(!function_exists('get_business_delivery_charges')){
+	function get_business_delivery_charges($id)
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT b.delivery_fee as charges FROM business b
+		inner join products p on p.bussiness_id = b.pk_id where p.bussiness_id=$id");
+		$delivery_fee = $query->getRowArray();
+		return $delivery_fee['charges'];
+	}
+}
+
+// if(!function_exists('get_business_delivery_charges')){
+// 	function get_business_delivery_charges($product_id)
+// 	{  
+// 		$db    = \Config\Database::connect();
+// 		$query = $db->query("SELECT b.delivery_fee as charges FROM business b
+// 		inner join products p on p.bussiness_id = b.pk_id where p.pk_id=$product_id");
+// 		$delivery_fee = $query->getRowArray();
+// 		return $delivery_fee['charges'];
+// 	}
+// }
+
+if(!function_exists('get_business_category_id')){
+	function get_business_category_id($business_id)
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT b.business_category_id as cat_id FROM business b
+		inner join products p on p.bussiness_id = b.pk_id where b.pk_id='{$business_id}'");
+		$delivery_fee = $query->getRowArray();
+		// print_r($delivery_fee['cat_id']); exit;
+		return $delivery_fee['cat_id'];
+	}
+}
+
+if(!function_exists('get_method_id')){
+	function get_method_id($paymentmethod)
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT pk_id FROM payment_methods where description='{$paymentmethod}'");
+		$delivery_fee = $query->getRowArray();
+		return $delivery_fee['pk_id'];
+	}
+}
+
+if(!function_exists('get_method_name')){
+	function get_method_name($paymentmethod)
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT method_title FROM payment_methods where pk_id='{$paymentmethod}'");
+		$delivery_fee = $query->getRowArray();
+		return $delivery_fee['method_title'];
+	}
+}
+
+if(!function_exists('authentication')){
+	function authentication()
+	{  
+        if(isset($_SESSION) && $this->session->get('UserAuth') == 'Yes')
+            return redirect()->route('customer/dashboard');
+        else
+            echo view('customers/authentication/login');
+	}
+}
+
+if(!function_exists('get_unit_by_product_id')){
+	function get_unit_by_product_id($product_id)
+	{  
+		$db    = \Config\Database::connect();
+		$query = $db->query("SELECT unit_title FROM products_units pu join products p on pu.pk_id = p.product_unit_id
+		where p.pk_id='{$product_id}'");
+		$unit_title = $query->getRowArray();
+		return $unit_title['unit_title'];
 	}
 }
 ?>

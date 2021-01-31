@@ -1,3 +1,4 @@
+<?php //print_r($err); exit; ?>
 <style>
 .cancel-cst-btn{    
 	background: #f55d2c;
@@ -43,7 +44,7 @@
 									<div class="news-content-right pd-20">
 										<div class="form-group">
 											<label class="form-label">Tite*</label>
-											<input type="text" class="form-control" placeholder="Title" name="title" required>
+											<input type="text" class="form-control" placeholder="Title" name="title" value="<?php if(!empty($err)){echo $err['title'];} else{} ?>" required>
 										<?php if($validation->getError('title')) {?>
 											<div class='alert alert-danger mt-2'>
 											  <?= $error = $validation->getError('title'); ?>
@@ -54,7 +55,7 @@
 												<label class="form-label">Description*</label>
 												<div class="card card-editor">
 													<div class="content-editor">
-														<textarea class="text-control" placeholder="Enter Description" name="description" required></textarea>
+														<textarea class="text-control" placeholder="Enter Description" name="description" required><?php if(!empty($err)){echo $err['description'];} else{} ?></textarea>
 													</div>
 												</div>
 										<?php if($validation->getError('description')) {?>
@@ -66,7 +67,7 @@
 										<div class="form-group">
 											<label class="form-label">Status*</label>
 											<select id="status" name="is_active" class="form-control" >
-												<option selected value="1">Active</option>
+												<option value="1" selected>Active</option>
 												<option value="0">Inactive</option>
 											</select>
 										</div>
@@ -77,6 +78,11 @@
 													<input type="file" class="form-control" name="file" accept="image/*">
 												</div>
 											</div>
+											<?php if($validation->getError('file')) {?>
+											<div class='alert alert-danger mt-2'>
+											  <?= $error = $validation->getError('file'); ?>
+											</div>
+											<?php }?>	
 										</div>
 										<button class="save-btn hover-btn" type="submit">Add New Business Categories</button>
 										<a  href="<?php echo base_url(); ?>/Business-Categories" class="cancel-cst-btn">Cancel</a>

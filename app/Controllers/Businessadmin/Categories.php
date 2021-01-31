@@ -10,6 +10,7 @@ class Categories extends BaseController
 	{
 		helper('business_function_helper');
 	}
+
 	public function index()
 	{
 		$pager = \Config\Services::pager();
@@ -18,7 +19,7 @@ class Categories extends BaseController
 		$displaydata = [
             'categories' => $model->paginate(5),
             'pager' => $model->pager
-        ];
+		];
 		$data['pageTitle'] = 'Categories Listing';
 		$data['fileToLoad'] = '/Businessadmin/categories/overview';
 		$data['data'] = $displaydata;
@@ -39,6 +40,7 @@ class Categories extends BaseController
 		$data['data'] = $data;
 		echo view('templates/business/business_template', $data);
 	}
+	
 	public function categories_save()
 	{
 		//print_r($_POST); exit();
@@ -57,13 +59,13 @@ class Categories extends BaseController
             ],
 		]))
 		{
-			$business_model = new BusinessModel();
-			$data['business'] = $business_model->getBusiness();
-			$data['pageTitle'] = 'Categories Add';
-			$data['fileToLoad'] = '/Businessadmin/categories/add_categories';
-			$data['data'] = $data;
-			echo view('templates/business/business_template', $data);
-
+			// $business_model = new BusinessModel();
+			// $data['business'] = $business_model->getBusiness();
+			// $data['pageTitle'] = 'Categories Add';
+			// $data['fileToLoad'] = '/Businessadmin/categories/add_categories';
+			// $data['data'] = $data;
+			// echo view('templates/business/business_template', $data);
+			return redirect()->to('/Categories-Add')->withInput();
 		}
 		else
 		{

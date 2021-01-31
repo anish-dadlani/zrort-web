@@ -80,9 +80,9 @@ li {
 											<tr>
 												<td class="text-center" ><?php echo $i; ?> </td>
 												<td class="" ><?php echo $row['name']; ?></td>
-												<td class="" ><?php echo $row['product_type']; ?></td>
-												<td class="" ><?php echo get_product_categories_name($row['product_category_id']); ?></td>
-												<td class="" ><?php echo get_product_unit_name($row['product_unit_id']); ?></td>
+												<td class="" ><?php echo $row['product_type']; ?></td> 
+												<td class="" ><?php echo get_product_categories_name($row['product_category_id']); ?></td> 
+												<td class="" ><?php echo get_product_unit_name($row['product_unit_id']); ?>
 												<td class="" ><?php echo get_business_name($row['bussiness_id']); ?></td>
 												<td class="" ><?php echo $row['shortname']; ?></td>
 												<td class="" ><?php echo $row['unit_price']; ?></td>

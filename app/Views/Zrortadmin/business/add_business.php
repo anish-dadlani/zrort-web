@@ -46,16 +46,16 @@
 												<div class="add-shop-content pd-20">
 													<div class="form-group">
 														<label class="form-label">Business Number*</label>
-														<input type="text" class="form-control" placeholder="Business Number"  name="business_number" required>
+														<input type="text" class="form-control numberclass" placeholder="Business Number"  name="business_number" value="<?= old('business_number'); ?>" required>
 													<?php if($validation->getError('business_number')) {?>
 														<div class='alert alert-danger mt-2'>
-														  <?= $error = $validation->getError('business_number'); ?>
+														  <?php echo $error = $validation->getError('business_number'); ?>
 														</div>
 													<?php }?>
 													</div>
 													<div class="form-group">
 														<label class="form-label">Name*</label>
-														<input type="text" class="form-control" placeholder="Business Name"  name="name" required>
+														<input type="text" class="form-control" placeholder="Business Name"  name="name" value="<?= old('name'); ?>" required>
 													<?php if($validation->getError('name')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('name'); ?>
@@ -64,7 +64,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Country*</label>
-														<input type="text" class="form-control" placeholder="Country Name"  name="country" required>
+														<input type="text" class="form-control" placeholder="Country Name"  name="country" value="<?= old('country'); ?>" required>
 													<?php if($validation->getError('country')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('country'); ?>
@@ -73,7 +73,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">State*</label>
-														<input type="text" class="form-control" placeholder="Sate Name"  name="state" required>
+														<input type="text" class="form-control" placeholder="Sate Name"  name="state" value="<?= old('state'); ?>" required>
 													<?php if($validation->getError('state')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('state'); ?>
@@ -82,7 +82,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">City*</label>
-														<input type="text" class="form-control" placeholder="City Name"  name="city" required>
+														<input type="text" class="form-control" placeholder="City Name"  name="city" value="<?= old('city'); ?>" required>
 													<?php if($validation->getError('city')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('city'); ?>
@@ -91,7 +91,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Postal Code*</label>
-														<input type="text" class="form-control" placeholder="Postal Code"  name="postalcode" required>
+														<input type="text" class="form-control numberclass" placeholder="Postal Code" name="postalcode" value="<?= old('postalcode'); ?>" required>
 													<?php if($validation->getError('postalcode')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('postalcode'); ?>
@@ -102,17 +102,14 @@
 														<label class="form-label">Business Category*</label>
 														<select id="categtory" name="business_category_id" class="form-control">
 															<option value="" >--Select--</option>
-															<?php
-															foreach($get_businesscategories as $row)
-															{
+															<?php foreach($get_businesscategories as $row) {
 																echo '<option value="'.$row['pk_id'].'">'.$row['title'].'</option>';
-															}
-															?>
+															} ?>
 														</select>
 													</div>
 													<div class="form-group">
 														<label class="form-label">Delivery Charge*</label>
-														<input type="text" class="form-control" placeholder="$0" name="delivery_fee" required>
+														<input type="text" class="form-control numberclass" placeholder="$0" name="delivery_fee" value="<?= old('delivery_fee'); ?>" required>
 													<?php if($validation->getError('delivery_fee')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('delivery_fee'); ?>
@@ -121,7 +118,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Latitude*</label>
-														<input type="text" class="form-control" placeholder="0" name="lat" required>
+														<input type="text" class="form-control numberclass" placeholder="0" name="lat" value="<?= old('lat'); ?>" required>
 													<?php if($validation->getError('lat')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('lat'); ?>
@@ -130,7 +127,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Longitude*</label>
-														<input type="text" class="form-control" placeholder="0" name="lang" required>
+														<input type="text" class="form-control numberclass" placeholder="0" name="lang" value="<?= old('lang'); ?>" required>
 													<?php if($validation->getError('lang')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('lang'); ?>
@@ -153,7 +150,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Business Website*</label>
-														<input type="text" class="form-control" placeholder="Business Website"  name="business_website" required>
+														<input type="text" class="form-control" placeholder="Business Website"  name="business_website" value="<?= old('business_website'); ?>" required>
 													<?php if($validation->getError('business_website')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('business_website'); ?>
@@ -162,7 +159,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Tagline*</label>
-														<input type="text" class="form-control" placeholder="Tagline"  name="tagline" required>
+														<input type="text" class="form-control" placeholder="Tagline"  name="tagline" value="<?= old('tagline'); ?>" required>
 													<?php if($validation->getError('tagline')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('tagline'); ?>
@@ -173,7 +170,7 @@
 														<label class="form-label">Description*</label>
 														<div class="card card-editor">
 															<div class="content-editor">
-																 <textarea class="text-control" placeholder="Enter Description" name="description" required></textarea>
+																 <textarea class="text-control" placeholder="Enter Description" name="description" required><?= old('description'); ?></textarea>
 															</div>
 														</div>
 													<?php if($validation->getError('description')) {?>
@@ -189,6 +186,11 @@
 																<input type="file" class="form-control" name="file" accept="image/*">
 															</div>
 														</div>
+														<?php if($validation->getError('file')) {?>
+														<div class='alert alert-danger mt-2'>
+														  <?= $error = $validation->getError('file'); ?>
+														</div>
+													<?php }?>
 													</div>	
 													<div class="form-group">
 														<label class="form-label">Business Logo*</label>
@@ -197,6 +199,11 @@
 																<input type="file" class="form-control" name="logofile" accept="image/*">
 															</div>
 														</div>
+														<?php if($validation->getError('logofile')) {?>
+														<div class='alert alert-danger mt-2'>
+														  <?= $error = $validation->getError('logofile'); ?>
+														</div>
+													<?php }?>
 													</div>	
 													<button class="save-btn hover-btn" type="submit">Add New Business</button>
 													<a href="<?php echo base_url(); ?>/Business" class="cancel-cst-btn">Cancel</a>
@@ -211,7 +218,7 @@
 												<div class="add-shop-content pd-20">
 													<div class="form-group">
 														<label class="form-label">Delivery Price*</label>
-														<input type="number"  class="form-control" placeholder="Enter Price" name="min_delivery_price" required>
+														<input type="number"  class="form-control numberclass" placeholder="Enter Price" name="min_delivery_price" value="<?= old('min_delivery_price'); ?>" required>
 													<?php if($validation->getError('min_delivery_price')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('min_delivery_price'); ?>
@@ -220,7 +227,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Delivery Time*</label>
-														<input type="time" id="default-picker" class="form-control" placeholder="Select time" name="min_delivery_time" required>
+														<input type="time" id="default-picker" class="form-control" placeholder="Select time" name="min_delivery_time" value="<?= old('min_delivery_time'); ?>" required>
 													</div>
 												</div>
 											</div>
@@ -232,7 +239,7 @@
 												<div class="add-shop-content pd-20">
 													<div class="form-group">
 														<label class="form-label">First Name*</label>
-														<input class="form-control" type="text" placeholder="Enter First Name" name="firstname" required>
+														<input class="form-control" type="text" placeholder="Enter First Name" name="firstname" value="<?= old('firstname'); ?>" required>
 													<?php if($validation->getError('firstname')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('firstname'); ?>
@@ -241,7 +248,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Last Name*</label>
-														<input class="form-control" type="text" placeholder="Enter Last Name" name="lastname" required>
+														<input class="form-control" type="text" placeholder="Enter Last Name" name="lastname" value="<?= old('lastname'); ?>" required>
 													<?php if($validation->getError('lastname')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('lastname'); ?>
@@ -250,7 +257,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Username*</label>
-														<input class="form-control" type="text" placeholder="Enter Username" name="username" required>
+														<input class="form-control" type="text" placeholder="Enter Username" name="username" value="<?= old('username'); ?>" required>
 													<?php if($validation->getError('username')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('username'); ?>
@@ -259,7 +266,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Email Address*</label>
-														<input class="form-control" type="email" placeholder="Enter Email Address" name="business_email" required>
+														<input class="form-control" type="email" placeholder="Enter Email Address" name="business_email" value="<?= old('business_email'); ?>" required>
 													<?php if($validation->getError('business_email')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('business_email'); ?>
@@ -268,7 +275,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Mobile Number*</label>
-														<input class="form-control" type="text" placeholder="Enter Mobile Number" name="business_mobile" required>
+														<input class="form-control numberclass" type="text" placeholder="Enter Mobile Number" name="business_mobile" value="<?= old('business_mobile'); ?>" required>
 													<?php if($validation->getError('business_mobile')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('business_mobile'); ?>
@@ -277,7 +284,7 @@
 													</div>
 													<div class="form-group">
 														<label class="form-label">Phone Number*</label>
-														<input class="form-control" type="text" placeholder="Enter Phone Number" name="business_landline" required>
+														<input class="form-control numberclass" type="text" placeholder="Enter Phone Number" name="business_landline" value="<?= old('business_landline'); ?>" required>
 													<?php if($validation->getError('business_landline')) {?>
 														<div class='alert alert-danger mt-2'>
 														  <?= $error = $validation->getError('business_landline'); ?>
@@ -297,7 +304,7 @@
 														<label class="form-label">Owner Address*</label>
 														<div class="card card-editor">
 															<div class="content-editor">
-																 <textarea class="text-control" placeholder="Enter Address" name="business_address" required></textarea>
+																 <textarea class="text-control" placeholder="Enter Address" name="business_address" required><?= old('business_address'); ?></textarea>
 															</div>
 														</div>
 													<?php if($validation->getError('business_address')) {?>

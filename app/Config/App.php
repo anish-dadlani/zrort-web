@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost/zrort-web/';
+	public $baseURL = 'http://localhost/zrort-web/public';
 
 	/*
 	|--------------------------------------------------------------------------

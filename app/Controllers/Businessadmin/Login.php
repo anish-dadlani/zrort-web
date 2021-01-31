@@ -1,4 +1,5 @@
-<?php namespace App\Controllers\Businessadmin;
+<?php 
+namespace App\Controllers\Businessadmin;
 use App\Models\Businessadmin\LoginModel;
 use CodeIgniter\Controller;
 
@@ -6,14 +7,14 @@ use App\Controllers\BaseController;
 class Login extends BaseController
 {
 	public function index(){
-		//print_r($this->session); //exit();
 		if($this->session->get('UserAuth') == 'Yes'){
-			//print_r('a'); exit();
 			return redirect()->route('Products');
-		}else{  //print_r('b'); exit();
+		}
+		else{
 			echo view('Businessadmin/businesslogin/login');
 		}
 	}
+	
 	public function login_user()
 	{	
 		$model = new LoginModel();
@@ -22,23 +23,23 @@ class Login extends BaseController
 		$curr_date = date("Y-m-d");
 		$this -> session -> expire = time() + (120 * 120);
 		$row = $model -> authenticate_user($username, $password);
-		$row=$row[0];
-		//print_r($row); exit();
+		// $row=$row[0];
 		if($row > 0){
 			$sessionData = array(
-				'username'  => $row['username'],
-				'businessuser_id' 	=> $row['pk_id'],
-				'zrortuser_id' 	=> $row['created_by'],
-				'UserAuth'  => 'Yes'
+				'username' => $row[0]['username'],
+				'businessuser_id' => $row[0]['pk_id'],
+				'zrortuser_id' => $row[0]['created_by'],
+				'UserAuth' => 'Yes'
 			);
-			//print_r($sessionData); exit();
-			$this->session-> set($sessionData);
-			//print_r($this->session); exit();
+			// print_r($sessionData); exit;
+			$this->session->set($sessionData);
 			return redirect()->to('index')->with('msg', 'Logged in Successful');
-		}else{
+		}
+		else{
 			return redirect()->to('index')->with('message', 'Wrong Credentials! Try Again');
 		}
 	}
+
 	public function logout()
 	{
 		$businessuser_id = session('businessuser_id');

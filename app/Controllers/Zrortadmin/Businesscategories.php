@@ -1,14 +1,15 @@
 <?php namespace App\Controllers\Zrortadmin;
 use App\Models\Zrortadmin\BusinesscategoriesModel;
 use CodeIgniter\Controller;
-
 use App\Controllers\BaseController;
+
 class Businesscategories extends BaseController
 {
 	public function __construct(...$params)
 	{
 		helper('zarorat_functions_helper');
 	}
+
 	public function index()
 	{
 		$pager = \Config\Services::pager();
@@ -29,6 +30,7 @@ class Businesscategories extends BaseController
 		$model = new BusinesscategoriesModel();
 		$data['businesscategories'] = $model->getBusinesscategories($slug);
 	}
+
 	public function add_businesscategories()
 	{
 		$data['pageTitle'] = 'Business Categories Add';
@@ -36,6 +38,7 @@ class Businesscategories extends BaseController
 		$data['data'] = $data;
 		echo view('templates/admin/zarorat_template', $data);
 	}
+
 	public function businesscategories_save()
 	{
 		$user_id =   $this->session->get('user_id');
@@ -50,12 +53,16 @@ class Businesscategories extends BaseController
                 'max_size[file,4096]',
             ],
 		]))
-		{
+		{	
+			$data_post = array(
+				'title' => $this->request->getPost('title'),
+				'description' => $this->request->getPost('description'),
+			);
 			$data['pageTitle'] = 'Business Categories Add';
 			$data['fileToLoad'] = '/Zrortadmin/businesscategories/add_businesscategories';
+			$data['err'] = $data_post;
 			$data['data'] = $data;
 			echo view('templates/admin/zarorat_template', $data);
-
 		}
 		else
 		{
@@ -82,7 +89,6 @@ class Businesscategories extends BaseController
 				}
 			} */
 			//var_dump($image); exit();
-			
 			$data = array(
 				'title' => $this->request->getPost('title'),
 				'description' => $this->request->getPost('description'),
@@ -97,6 +103,7 @@ class Businesscategories extends BaseController
 			return redirect()->route('Business-Categories');
 		}
 	}
+
 	public function view_businesscategories($id=null)
 	{ 
 		$model = new BusinesscategoriesModel();
@@ -106,6 +113,7 @@ class Businesscategories extends BaseController
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
+
 	public function edit_businesscategories($id=null)
 	{ 
 		$model = new BusinesscategoriesModel();
@@ -115,6 +123,7 @@ class Businesscategories extends BaseController
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
+
 	public function delete_businesscategories($id=null)
 	{
 		$model = new BusinesscategoriesModel();
@@ -126,6 +135,7 @@ class Businesscategories extends BaseController
 		zrortadmin_activityLog('configuration','Businesscategories Deleted',$data);
 		return redirect()->route('Business-Categories');
 	}
+
 	public function update_businesscategories()
 	{
 		$model = new BusinesscategoriesModel();

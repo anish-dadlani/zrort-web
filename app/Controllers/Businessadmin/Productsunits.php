@@ -9,6 +9,7 @@ class Productsunits extends BaseController
 	{
 		helper('zarorat_functions_helper');
 	}
+
 	public function index()
 	{
 		$pager = \Config\Services::pager();
@@ -17,7 +18,7 @@ class Productsunits extends BaseController
 		$displaydata = [
             'productsunits' => $model->paginate(5),
             'pager' => $model->pager
-        ];
+		];
 		$data['pageTitle'] = 'Products Units Listing';
 		$data['fileToLoad'] = '/Businessadmin/productsunits/overview';
 		$data['data'] = $displaydata;
@@ -47,11 +48,11 @@ class Productsunits extends BaseController
 			'is_active'  => 'required'
 		]))
 		{
-			$data['pageTitle'] = 'Products Units Add';
-			$data['fileToLoad'] = '/Businessadmin/productsunits/add_productsunits';
-			$data['data'] = $data;
-			echo view('templates/admin/zarorat_template', $data);
-
+			// $data['pageTitle'] = 'Products Units Add';
+			// $data['fileToLoad'] = '/Businessadmin/productsunits/add_productsunits';
+			// $data['data'] = $data;
+			// echo view('templates/admin/zarorat_template', $data);
+			return redirect()->to('/Productsunits-Add')->withInput();
 		}
 		else
 		{
@@ -85,6 +86,7 @@ class Productsunits extends BaseController
 		$data['data'] = $displaydata;
 		echo view('templates/admin/zarorat_template', $data);
 	}
+
 	public function delete_productsunits($id=null)
 	{
 		//print_r($id); exit();
@@ -97,6 +99,7 @@ class Productsunits extends BaseController
 		zrortadmin_activityLog('configuration','ProductsUnits Deleted',$data);
 		return redirect()->route('Productsunits');
 	}
+
 	public function update_productsunits()
 	{
 		$model = new ProductsunitsModel();
