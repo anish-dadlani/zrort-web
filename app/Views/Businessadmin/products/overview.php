@@ -76,14 +76,14 @@ li {
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<?php $startpoint=0; $i=$startpoint;  foreach ($products as $row):  $i++;?>
+											<?php $startpoint=0; $i=$startpoint; foreach ($products as $row):  $i++;?>
 											<tr>
 												<td class="text-center" ><?php echo $i; ?> </td>
 												<td class="" ><?php echo $row['name']; ?></td>
 												<td class="" ><?php echo $row['product_type']; ?></td> 
-												<td class="" ><?php echo get_product_categories_name($row['product_category_id']); ?></td> 
-												<td class="" ><?php echo get_product_unit_name($row['product_unit_id']); ?>
-												<td class="" ><?php echo get_business_name($row['bussiness_id']); ?></td>
+												<td class="" ><?php if($row['product_category_id'] == NULL || $row['product_category_id'] == ""){}else{echo get_product_categories_name($row['product_category_id']);} ?></td> 
+												<td class="" ><?php if($row['product_unit_id'] == NULL || $row['product_unit_id'] == ""){}else{echo get_product_unit_name($row['product_unit_id']);} ?>
+												<td class="" ><?php if($row['bussiness_id'] == NULL || $row['bussiness_id'] == ""){}else{echo get_business_name($row['bussiness_id']);} ?></td>
 												<td class="" ><?php echo $row['shortname']; ?></td>
 												<td class="" ><?php echo $row['unit_price']; ?></td>
 												<td class="" ><?php if($row['is_active']==1){echo 'Active';}else{echo 'Inactive';}?></td>
