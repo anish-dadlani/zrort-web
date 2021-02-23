@@ -1,4 +1,4 @@
-<?php namespace App\Controllers\Customers\address;
+<?php namespace App\Controllers\Customers;
 use App\Models\Customers\CustomerModel;
 use App\Models\Customers\CustomerAddressModel;
 use App\Models\Businessadmin\CategoriesModel;

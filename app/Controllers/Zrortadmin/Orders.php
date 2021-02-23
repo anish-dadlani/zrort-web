@@ -1,5 +1,6 @@
 <?php namespace App\Controllers\Zrortadmin;
 use App\Models\Zrortadmin\OrdersModel;
+use App\Models\Customers\OrderModel;
 use CodeIgniter\Controller;
 
 use App\Controllers\BaseController;
@@ -11,8 +12,13 @@ class Orders extends BaseController
 	}
 	public function index()
 	{
-		$model = new OrdersModel();
-		$displaydata['orders'] = $model->getOrders();
+		$pager = \Config\Services::pager();
+		$model = new OrderModel();
+		$displaydata['orders'] = $model->findAll();
+		$displaydata = [
+            'orders' => $model->paginate(5),
+            'pager' => $model->pager
+		];
 		$data['pageTitle'] = 'Order Listing';
 		$data['fileToLoad'] = '/Zrortadmin/orders/orders_listing';
 		$data['data'] = $displaydata;

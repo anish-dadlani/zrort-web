@@ -123,54 +123,54 @@ $routes->group('customer', function($routes)
 	
 	$routes->group('address', function($routes)
 	{
-		$routes->add('view', 'Customers\address\Address::address_view');
-		$routes->add('save', 'Customers\address\Address::address_save');
-		$routes->add('edit/(:segment)', 'Customers\address\Address::address_edit/$1');
-		$routes->add('delete/(:segment)', 'Customers\address\Address::address_delete/$1');
+		$routes->add('view', 'Customers\Address::address_view');
+		$routes->add('save', 'Customers\Address::address_save');
+		$routes->add('edit/(:segment)', 'Customers\Address::address_edit/$1');
+		$routes->add('delete/(:segment)', 'Customers\Address::address_delete/$1');
 	});
 });
 
 $routes->group('products', function($routes)
 {
-	$routes->add('/', 'Customers\products\Products::all_products');
-	$routes->add('new_products/(:segment)', 'Customers\products\Products::recent_products/$1');
-	$routes->add('featured/(:segment)', 'Customers\products\Products::featured_products/$1');
-	$routes->add('view/(:segment)', 'Customers\products\Products::getSingleProductDetails/$1');
-	$routes->add('cart/(:segment)', 'Customers\products\Products::addToCart/$1');
-	$routes->add('cartRemove/(:segment)', 'Customers\products\Products::removeFromCart/$1');
-	$routes->add('search', 'Customers\products\Products::searchForProducts'); 
-	$routes->add('count', 'Customers\products\Products::count_product_cart');
-	$routes->add('single/(:segment)', 'Customers\products\Products::getProductPrice/$1');
+	$routes->add('/', 'Customers\Products::all_products');
+	$routes->add('new_products/(:segment)', 'Customers\Products::recent_products/$1');
+	$routes->add('featured/(:segment)', 'Customers\Products::featured_products/$1');
+	$routes->add('view/(:segment)', 'Customers\Products::getSingleProductDetails/$1');
+	$routes->add('cart/(:segment)', 'Customers\Products::addToCart/$1');
+	$routes->add('cartRemove/(:segment)', 'Customers\Products::removeFromCart/$1');
+	$routes->add('search', 'Customers\Products::searchForProducts'); 
+	$routes->add('count', 'Customers\Products::count_product_cart');
+	$routes->add('single/(:segment)', 'Customers\Products::getProductPrice/$1');
 	
 	$routes->group('wishlist', function($routes)
 	{
-		$routes->add('add/(:segment)', 'Customers\products\Products::add_to_wishlist/$1');	
-		$routes->add('remove/(:segment)', 'Customers\products\Products::remove_from_wishlist/$1');
-		$routes->add('count', 'Customers\products\Products::count_product_wishlist');
+		$routes->add('add/(:segment)', 'Customers\Products::add_to_wishlist/$1');	
+		$routes->add('remove/(:segment)', 'Customers\Products::remove_from_wishlist/$1');
+		$routes->add('count', 'Customers\Products::count_product_wishlist');
 	});
 
 	$routes->group('category', function($routes)
 	{
-		$routes->add('view/(:segment)', 'Customers\products\Products::getProductByCatID/$1');
+		$routes->add('view/(:segment)', 'Customers\Products::getProductByCatID/$1');
 	});
 });
 
 $routes->group('business', function($routes)
 {
-	$routes->add('view', 'Customers\products\Products::view_all_business');
+	$routes->add('view', 'Customers\Products::view_all_business');
 
 	$routes->group('products', function($routes)
 	{
-		$routes->add('view/(:segment)', 'Customers\products\Products::getProductsByBusinessID/$1');	
+		$routes->add('view/(:segment)', 'Customers\Products::getProductsByBusinessID/$1');	
 	});
 });
 
 $routes->group('orders', function($routes)
 {
-	$routes->add('set', 'Customers\orders\Orders::set');
-	$routes->post('set_quantity', 'Customers\orders\Orders::set_quantity');
-	$routes->add('checkout', 'Customers\orders\Orders::checkout');
-	$routes->add('placed', 'Customers\orders\Orders::ordersPlaced');
-	$routes->add('invoice/(:segment)', 'Customers\orders\Orders::billInvoice/$1');
-	$routes->add('save', 'Customers\orders\Orders::saveOrder');
+	$routes->add('set', 'Customers\Orders::set');
+	$routes->post('set_quantity', 'Customers\Orders::set_quantity');
+	$routes->add('checkout', 'Customers\Orders::checkout');
+	$routes->add('placed', 'Customers\Orders::ordersPlaced');
+	$routes->add('invoice/(:segment)', 'Customers\Orders::billInvoice/$1');
+	$routes->add('save', 'Customers\Orders::saveOrder');
 });

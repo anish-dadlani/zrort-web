@@ -5,5 +5,6 @@
 	<script src="<?php echo base_url('assets/customers/vendor/semantic/semantic.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/customers/js/jquery.countdown.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/customers/js/custom.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/customers/js/product.thumbnail.slider.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/customers/js/offset_overlay.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/customers/js/night-mode.js'); ?>"></script>

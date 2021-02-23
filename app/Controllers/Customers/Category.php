@@ -1,4 +1,4 @@
-<?php namespace App\Controllers\Customers\category;
+<?php namespace App\Controllers\Customers;
 use App\Models\Customers\CustomerModel;
 use App\Models\Customers\ProductsModel;
 use App\Models\Businessadmin\CategoriesModel;

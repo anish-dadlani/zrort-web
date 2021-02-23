@@ -1,4 +1,4 @@
-<?php namespace App\Controllers\Customers\orders;
+<?php namespace App\Controllers\Customers;
 use App\Models\Customers\OrderModel;
 use App\Models\Customers\CustomerModel;
 use App\Models\Customers\ProductsModel;
