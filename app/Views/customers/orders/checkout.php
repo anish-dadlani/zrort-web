@@ -369,15 +369,19 @@ if(isset($empty) && $empty == "Yes"){
 					<div class="right-cart-dt-body">
 					<?php $sumTotal = 0; $sumSaving = 0; $charges = 0;
 					if(isset($_SESSION['cart'])){
-						  foreach($_SESSION['cart'] as $key => $item): 
-							$charges = $charges + get_business_delivery_charges($item['pk_id']);
-							endforeach;
+						foreach($_SESSION['cart'] as $key => $item): 
+							$business_ids[] = $item['bussiness_id'];
+							$business_ids = array_unique($business_ids);
+						endforeach;
+						foreach($business_ids as $id){
+							$charges = $charges + get_business_delivery_charges($id);
+						}
 						foreach($_SESSION['cart'] as $key => $item): 
 							if(isset($item['discount_amount'])){
-								$sumTotal = $sumTotal + $item['discount_amount'] + $charges; 
-								$sumSaving = $sumSaving + ($item['unit_price'] - $item['discount_amount']);
+								$sumTotal = $sumTotal + ($item['discount_amount'] * $item['quantity']); 
+								$sumSaving = $sumSaving + (($item['unit_price'] - $item['discount_amount'])  * $item['quantity']);
 							}else{
-								$sumTotal = $sumTotal + $item['unit_price'] + $charges; 
+								$sumTotal = $sumTotal + ($item['unit_price'] * $item['quantity']); 
 							}				
 						?>
 						
@@ -399,37 +403,28 @@ if(isset($empty) && $empty == "Yes"){
 								<button type="button" class="cart-close-btn" onclick="removeFromCart(<?=$item['pk_id']?>)"><i class="uil uil-multiply"></i></button>
 							</div>									
 						</div>
-						<?php endforeach; }?>
+						<?php endforeach;
+					}?>
 					</div>
 					<div class="total-checkout-group">
 						<!-- <div class="cart-total-dil">
 							<h4>Gambo Super Market</h4>
 							<span>$15</span>
-						</div>
+						</div>-->
 						<div class="cart-total-dil pt-3">
 							<h4>Delivery Charges</h4>
-							<span>$1</span>
-						</div> -->
+							<span><?= $charges ?></span>
+						</div> 
 					</div>
-					<?php if(isset($_SESSION['checkout'])){?>
+					<?php $finaltotal = $sumTotal + $charges; ?>
 					<div class="cart-total-dil saving-total ">
 						<h4>Total Saving</h4>
-							<span><?= 'Rs '.$_SESSION['checkout']['sumSaving'] ?></span>
+						<span><?= 'Rs '.$sumSaving ?></span>
 					</div>
 					<div class="main-total-cart">
 						<h2>Total</h2>
-						<span><?= 'Rs '.$_SESSION['checkout']['finalTotal'] ?></span>
+						<span><?= 'Rs '.$finaltotal ?></span>
 					</div>
-					<?php } else {?>
-					<div class="cart-total-dil saving-total ">
-						<h4>Total Saving</h4>
-							<span><?= 'Rs '.$sumSaving ?></span>
-					</div>
-					<div class="main-total-cart">
-						<h2>Total</h2>
-						<span><?= 'Rs '.$sumTotal ?></span>
-					</div>
-					<?php } ?>
 					<div class="payment-secure">
 						<i class="uil uil-padlock"></i>Secure checkout
 					</div>

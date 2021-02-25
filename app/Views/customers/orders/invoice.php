@@ -49,10 +49,10 @@
 							</div>
 							<div class="bill-descp">
 								<div class="total-checkout-group p-0 border-top-0">
-									<!-- <div class="cart-total-dil"> -->
-										<!-- <h4>Subtotal</h4> -->
-										<!-- <span>Rs 15</span> -->
-									<!-- </div> -->
+									<div class="cart-total-dil">
+										<h4>Subtotal</h4>
+										<span><?= 'Rs '.$order_placed['sub_total']?></span>
+									</div>
 									<div class="cart-total-dil pt-3">
 										<h4>Delivery Charges</h4>
 										<span><?= 'Rs '.$order_placed['delivery_fee']?></span>

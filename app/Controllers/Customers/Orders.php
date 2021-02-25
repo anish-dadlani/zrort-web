@@ -21,14 +21,14 @@ class Orders extends BaseController
     
     public function set()
     {
-        unset($_SESSION['checkout']); 
-        $displaydata = [
-            'checkout'=> [
-                'finalTotal' => $this->request->getPost('finalTotal'),
-                'sumSaving' => $this->request->getPost('sumSaving'),
-            ]
-        ];
-        $this->session->set($displaydata);
+        // unset($_SESSION['checkout']); 
+        // $displaydata = [
+        //     'checkout'=> [
+        //         'finalTotal' => $this->request->getPost('finalTotal'),
+        //         'sumSaving' => $this->request->getPost('sumSaving'),
+        //     ]
+        // ];
+        // $this->session->set($displaydata);
     }
 
     public function set_quantity()
@@ -38,13 +38,9 @@ class Orders extends BaseController
             if($item['product_id'] == $this->request->getPost('product_id')) 
             {
                 if($this->request->getPost('qty') == 'minus')
-                {
                     $_SESSION['cart'][$key]['quantity'] = $_SESSION['cart'][$key]['quantity'] - 1;
-                }
                 else if($this->request->getPost('qty') == 'plus')
-                {
                     $_SESSION['cart'][$key]['quantity'] = $_SESSION['cart'][$key]['quantity'] + 1;
-                }
             }
         }
     }
@@ -54,8 +50,7 @@ class Orders extends BaseController
         $paymentMethodModel = new PaymentMethodModel();
         $displaydata['paymentMethod'] = $paymentMethodModel->findAll();
 
-        if(empty($_SESSION['cart']))
-        {
+        if(empty($_SESSION['cart'])){
             $displaydata['empty'] = "Yes";
         }
 
@@ -117,26 +112,20 @@ class Orders extends BaseController
                         $business_ids = array_unique($business_ids);
                         if(isset($item['discount_amount']) && $item['discount_amount'] != "" && $item['discount_amount'] > 0)
                         {
-                            $sumTotal = $sumTotal + $item['discount_amount'] + $charges; 
-                            $subTotal = $sumTotal + $item['discount_amount'];
-                            $sumSaving = $sumSaving + ($item['unit_price'] - $item['discount_amount']);
+                            $sumTotal = $sumTotal + ($item['discount_amount'] * $item['quantity']); 
+                            $subTotal = $subTotal + ($item['discount_amount'] * $item['quantity']);
+                            $sumSaving = $sumSaving + (($item['unit_price'] - $item['discount_amount']) * $item['quantity']);
                         }
-                        else
-                        {
-                            $subTotal = $sumTotal + $item['unit_price'];
-                            $sumTotal = $sumTotal + $item['unit_price'] + $charges;
+                        else{
+                            $subTotal = $subTotal + ($item['unit_price'] * $item['quantity']);
+                            $sumTotal = $sumTotal + ($item['unit_price'] * $item['quantity']);
                         }
                     endforeach;
 
-                    foreach($business_ids as $id)
-                    {
+                    foreach($business_ids as $id){
                         $charges = $charges + get_business_delivery_charges($id);
                     }
                     $sumTotal = $sumTotal + $charges;
-                }
-                if (isset($_SESSION['checkout']['finalTotal']) && $_SESSION['checkout']['finalTotal'] != "")
-                {
-                    $sumTotal = $_SESSION['checkout']['finalTotal'];
                 }
 
                 $orderData = [
@@ -170,8 +159,7 @@ class Orders extends BaseController
                             $sumTotal = $sumTotal + $item['discount_amount']; 
                             $sumSaving = $sumSaving + ($item['unit_price'] - $item['discount_amount']);
                         }
-                        else
-                        {
+                        else {
                             $sumTotal = $sumTotal + $item['unit_price']; 
                         }
                         $orderDetailsData = [
@@ -191,7 +179,6 @@ class Orders extends BaseController
                 $this->db->transComplete();
                 $customerCartModel->where('customer_id', $_SESSION['user_id'])->delete();
                 unset($_SESSION['cart']);
-                unset($_SESSION['checkout']);
             }
         }
         $this->ordersPlaced();
@@ -221,7 +208,7 @@ class Orders extends BaseController
         $orderModel = new OrderModel();
         $OrderDetailModel = new OrderDetailModel();
         $ProductsModel = new ProductsModel();
-        $displaydata['order_placed'] = $orderModel->select('o.order_no, o.date_time, o.total as t, ca.address_type, ca.house_no, ca.street, 
+        $displaydata['order_placed'] = $orderModel->select('o.order_no, o.sub_total, o.date_time, o.total as t, ca.address_type, ca.house_no, ca.street, 
         ca.sector_colony, ca.mobile1, ca.city, ca.zipcode, o.delivery_fee, o.payment_method_id, p.name, od.quantity, count(distinct(od.product_id)) as total_items')
         ->from('orders o')
         ->join('customer_addresses ca ', 'ca.pk_id = o.address_id')

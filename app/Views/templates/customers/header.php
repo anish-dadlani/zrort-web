@@ -20,4 +20,5 @@
 	<link href="<?php echo base_url(); ?>/assets/customers/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>/assets/customers/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/customers/vendor/semantic/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/customers/css/customestyle.css">
 </head>

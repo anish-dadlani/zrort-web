@@ -135,7 +135,6 @@ if(!function_exists('get_business_category_id')){
 		$query = $db->query("SELECT b.business_category_id as cat_id FROM business b
 		inner join products p on p.bussiness_id = b.pk_id where b.pk_id='{$business_id}'");
 		$delivery_fee = $query->getRowArray();
-		// print_r($delivery_fee['cat_id']); exit;
 		return $delivery_fee['cat_id'];
 	}
 }

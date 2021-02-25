@@ -30,8 +30,7 @@
 					<input class="prompt srch10" type="text" id="search" name="search" onkeyup="productSearch()" placeholder="Search for products..">
 					<i class='uil uil-search-alt icon icon1'></i>
 					<div id="suggestions">
-						<div id="autoSuggestionsList">
-						</div>
+						<div id="autoSuggestionsList"></div>
 					</div>
 				  </div>
 				</div>

@@ -1,0 +1,23 @@
+#suggestions{
+    position: absolute;
+top: 36px;
+background: #f7f7f7;
+z-index: 999999;
+width: 100%;
+}
+#autoSuggestionsList{
+    list-style-type: none;
+
+}
+#autoSuggestionsList li{
+    padding: 10px 5px;
+    border-bottom: 1px solid lightgray;
+}
+#autoSuggestionsList li a{
+    padding-left: 10px;
+    color: #222;
+    
+}
+#autoSuggestionsList li a:hover{
+    color: darkblue !important;
+}

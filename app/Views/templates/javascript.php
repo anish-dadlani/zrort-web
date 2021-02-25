@@ -195,18 +195,18 @@ function plus(product_id)
 				}
 				$('#finalTotal').text('Rs '+finalTotal);
                 $('#sumSaving').text('Rs '+sumSaving);
-                $("#checkout").on('click', function(){
-                    $.ajax({
-                        type: 'POST',
-                        url: "<?= base_url('orders/set')?>",
-                        data: {
-                            'finalTotal':finalTotal,
-                            'sumSaving':sumSaving,
-                        },
-                        success: function(result){
-                        }
-                    });
-                });                
+                // $("#checkout").on('click', function(){
+                //     $.ajax({
+                //         type: 'POST',
+                //         url: "<?php //echo base_url('orders/set'); ?>",
+                //         data: {
+                //             'finalTotal':finalTotal,
+                //             'sumSaving':sumSaving,
+                //         },
+                //         success: function(result){
+                //         }
+                //     });
+                // });                
 			}
 		});
 	}
