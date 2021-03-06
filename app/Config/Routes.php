@@ -30,7 +30,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Zrortadmin/Login::index');
+$routes->get('SuperAdmin', 'Zrortadmin/Login::index');
 //routes for logout
 $routes->get('logout', 'Zrortadmin/Login::logout');
 //routes for orders
@@ -81,7 +81,7 @@ $routes->get('Business-Categories-Edit/(:segment)', 'Zrortadmin\Businesscategori
 $routes->get('ZrortProfile-Add', 'Zrortadmin/Zrortprofile::add_zrortprofile');
 $routes->get('ZrortChange-Password', 'Zrortadmin/Zrortprofile::update_zrortchangepassword');
 //Businessadmin
-$routes->get('Business-Login', 'Businessadmin\Login::index');
+$routes->get('BusinessAdmin', 'Businessadmin\Login::index');
 //routes for logout
 $routes->get('logout', 'Businessadmin\Login::logout');
 $routes->get('BusinessProfile-Add', 'Businessadmin\Businessprofile::add_businessprofile');
@@ -108,6 +108,7 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
 
+$routes->add('/', 'Customers\Dashboard::getBusinessListing');
 $routes->group('customer', function($routes)
 {
 	$routes->add('/', 'Customers\authentication\Login::index');
@@ -117,7 +118,7 @@ $routes->group('customer', function($routes)
 	$routes->add('reset_password', 'Customers\authentication\Login::reset_password');
 	$routes->add('save', 'Customers\authentication\Register::register_customer');
 
-	$routes->add('dashboard', 'Customers\Dashboard::getBusinessListing');
+	// $routes->add('dashboard', 'Customers\Dashboard::getBusinessListing');
 	$routes->add('profile', 'Customers\Dashboard::customer_overview');
 	$routes->add('wishlist', 'Customers\Dashboard::customer_wishlist');
 	
@@ -158,6 +159,7 @@ $routes->group('products', function($routes)
 $routes->group('business', function($routes)
 {
 	$routes->add('view', 'Customers\Products::view_all_business');
+	$routes->add('search', 'Customers\Products::searchForBusiness');
 
 	$routes->group('products', function($routes)
 	{

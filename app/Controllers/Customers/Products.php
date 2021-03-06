@@ -5,6 +5,7 @@ use App\Models\Businessadmin\CategoriesModel;
 use App\Models\Customers\CustomerFavoritiesModel;
 use App\Models\Zrortadmin\BusinessModel;
 use App\Models\Customers\CustomerCartModel;
+use App\Models\Businessadmin\BusinessCategoriesModel;
 use App\Libraries\Cart;
 use CodeIgniter\Controller;
 
@@ -13,10 +14,13 @@ class Products extends BaseController
 {
     public function __construct(...$params)
 	{
-        helper('business_function_helper');       
+        //constructor   
     }
     
-    public function index(){}
+    public function index()
+    {
+        //do nothing
+    }
 
     public function recent_products($id)
     {
@@ -56,10 +60,7 @@ class Products extends BaseController
 
     public function getProductByCatID($id=null)
     {
-        $business_model = new BusinessModel();
-        $categories_model = new CategoriesModel();
         $productModel = new ProductsModel();
-
         $displaydata['products'] = $productModel->where('product_category_id', $id)->orderBy('created_datetime', 'DESC')->findAll();
         $displaydata['cat_id'] = $id;
 
@@ -73,9 +74,13 @@ class Products extends BaseController
     public function getSingleProductDetails($id=null)
     {
         $productModel = new ProductsModel();
-        $displaydata['products'] = $productModel->where('pk_id', $id)->findAll();
-        $displaydata['product_by_category'] = $productModel->where('product_category_id',$displaydata['products'][0]['product_category_id'])->findAll();
-        $displaydata['product_id'] = $id;
+        if($id != null){
+            $displaydata['products'] = $productModel->where('pk_id', $id)->findAll();
+            $displaydata['product_by_category'] = $productModel->where('product_category_id',$displaydata['products'][0]['product_category_id'])->findAll();
+            $displaydata['product_id'] = $id;
+        }else{
+            $displaydata = [];
+        }
 
         $data['pageTitle'] = 'Product Detail';
         $data['fileToLoad'] = '/customers/products/single_product';
@@ -109,7 +114,7 @@ class Products extends BaseController
     {
         $businessModel = new BusinessModel();
         $categories_model = new CategoriesModel();
-
+        $BusinessCategoriesModel = new BusinessCategoriesModel();
         $displaydata['products'] = $businessModel->join('products', 'products.bussiness_id = business.pk_id')->where('business.pk_id', $business_id)->orderBy('products.created_datetime', 'DESC')->findAll();
         $displaydata['featured'] = $businessModel->join('products', 'products.bussiness_id = business.pk_id')->where('business.pk_id', $business_id)->where('products.is_featured', '1')->findAll();
         $displaydata['categories'] = $categories_model->select('product_categories.*')->join('business', 'bussiness_id = business.pk_id')->where('business.pk_id', $business_id)->findAll();
@@ -176,8 +181,8 @@ class Products extends BaseController
     public function searchForProducts()
     {
         $search = $this->request->getPost('search');
-        $productModel = new ProductsModel();
-        $searchResult = $productModel->like('name', $search)->findAll();
+        $ProductsModel = new ProductsModel();
+        $searchResult = $ProductsModel->like('name', $search)->findAll();
         foreach ($searchResult as $key => $row):
             echo "<li><a href='" . base_url('products/view/'.$row['pk_id']) . "'>" . $row['name'] . "</a></li>";
         endforeach;
@@ -195,6 +200,16 @@ class Products extends BaseController
         $productModel = new ProductsModel();
         $data = $productModel -> select('unit_price, discount_amount') -> where('pk_id', $product_id) -> first();
         echo json_encode($data);
+    }
+
+    public function searchForBusiness()
+    {
+        $search = $this->request->getPost('search');
+        $BusinessModel = new BusinessModel();
+        $searchResult = $BusinessModel->like('name', $search)->findAll();
+        foreach ($searchResult as $key => $row):
+            echo "<li><a href='" . base_url('business/products/view/'.$row['pk_id']) . "'>" . $row['name'] . "</a></li>";
+        endforeach;
     }
 }
 ?>

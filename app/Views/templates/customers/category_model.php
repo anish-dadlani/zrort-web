@@ -1,4 +1,5 @@
 <!-- Category Model Start-->
+<?php $data = customerDashboard(); ?>
 <div id="category_model" class="header-cate-model main-gambo-model modal fade" tabindex="-1" role="dialog" aria-modal="false">
     <div class="modal-dialog category-area" role="document">
         <div class="category-area-inner">
@@ -12,7 +13,7 @@
 				    <h4>Select Category</h4>
 				</div>
                 <ul class="category-by-cat">
-				<?php foreach($_SESSION['categories'] as $key => $category){?>
+				<?php foreach($data['categories'] as $key => $category){?>
 					<li>
 						<a href="<?php echo base_url().'/products/category/view'.'/'.$category['pk_id']?>" class="single-cat-item">
 							<div class="icon">

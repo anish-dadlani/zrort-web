@@ -179,4 +179,22 @@ if(!function_exists('get_unit_by_product_id')){
 		return $unit_title['unit_title'];
 	}
 }
+
+if(!function_exists('customerDashboard')){
+	function customerDashboard()
+	{  
+		$business_model = new App\Models\Zrortadmin\BusinessModel();
+		$categories_model = new App\Models\Businessadmin\CategoriesModel();
+		$productModel = new App\Models\Customers\ProductsModel();
+		$customerCartModel = new App\Models\Customers\CustomerCartModel();
+		$BusinessCategoriesModel = new App\Models\Businessadmin\BusinessCategoriesModel();
+
+		$displaydata['business'] = $business_model->getBusiness();
+		$displaydata['categories'] = $categories_model->getCategories();
+		$displaydata['products'] = $productModel->orderBy('created_datetime', 'DESC')->findAll();
+		$displaydata['business_catgories'] = $BusinessCategoriesModel->where('is_active', '1')->findAll();
+
+		return $displaydata;
+	}
+}
 ?>

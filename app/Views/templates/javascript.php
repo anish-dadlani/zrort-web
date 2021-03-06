@@ -111,20 +111,25 @@ function deleteFromWishlist(productID){
 
 function addToCart(id)
 {
-    var number = document.getElementById("number").value;
-    $.ajax({
-        url : "<?= base_url('products/cart')?>/"+id,
-        type: "GET",
-        success: function(data) {
-            if(data == "Yes"){
-                alert("Item already exist in cart");
-            }else{
-                alert('Item successfully added to cart!');
-                showCartCount();
-                location.reload();
+    <?php if(isset($_SESSION['UserAuth']) == 'Yes'){ ?>
+        var number = document.getElementById("number").value;
+        $.ajax({
+            url : "<?= base_url('products/cart')?>/"+id,
+            type: "GET",
+            success: function(data) {
+                if(data == "Yes"){
+                    alert("Item already exist in cart");
+                }else{
+                    alert('Item successfully added to cart!');
+                    showCartCount();
+                    location.reload();
+                }
             }
-        }
-    });
+        });
+    <?php } else { ?>
+        alert('Please Login / Register to Continue!');
+        window.location.href = "<?php echo base_url(); ?>/customer/login";
+    <?php } ?>
 }
 
 function removeFromCart(id)
@@ -143,6 +148,27 @@ function removeFromCart(id)
 
 function productSearch() {
     var search = $('#search').val();
+    if (search.length === 0) {
+        $('#suggestions').hide();
+    }
+    else{
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url('business/search');?>",
+            data: {search:search},
+            success: function(data) {
+                if (data.length > 0) {
+                    $('#suggestions').show();
+                    $('#autoSuggestionsList').addClass('auto_list');
+                    $('#autoSuggestionsList').html(data);
+                }
+            }
+        });
+    }
+}
+
+function productSearch_() {
+    var search = $('#search_').val();
     if (search.length === 0) {
         $('#suggestions').hide();
     }

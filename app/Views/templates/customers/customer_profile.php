@@ -24,10 +24,14 @@
 							<label for="file"><i class="uil uil-camera-plus"></i></label>
 						</div>
 					</div>
-					<h4><?= $_SESSION['firstname'].' '.$_SESSION['lastname']?></h4>
-					<p><?= $_SESSION['phone']?><a href="#">
+					<h4>
+						<?php if(isset($_SESSION['UserAuth']) == 'Yes'){
+								echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
+						} ?>
+					</h4>
+					<p><?php if(isset($_SESSION['UserAuth']) == 'Yes'){echo  $_SESSION['phone']; }?><a href="#">
 					<!-- <i class="uil uil-edit"></i></a></p> -->
-					<!-- <div class="earn-points"><img src="<?= base_url()?>/assets/customers/images/Dollar.svg" alt="">Points : <span>20</span></div> -->
+					<!-- <div class="earn-points"><img src="<?php //base_url()?>/assets/customers/images/Dollar.svg" alt="">Points : <span>20</span></div> -->
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,5 @@
 <!-- Body Start -->
+<?php $data = customerDashboard(); ?>
 <div class="wrapper">
 	<!-- Offers Start -->
 	<div class="main-banner-slider">
@@ -7,7 +8,7 @@
 				<div class="col-md-12">
 					<div class="owl-carousel offers-banner owl-theme">
 						<div class="item">
-							<?php foreach($_SESSION['business'] as $key => $value): ?>
+							<?php foreach($data['business'] as $key => $value): ?>
 							<div class="offer-item">						
 								<div class="offer-item-img">
 									<div class="gambo-overlay"></div>

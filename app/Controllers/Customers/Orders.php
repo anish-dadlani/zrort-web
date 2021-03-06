@@ -16,7 +16,7 @@ class Orders extends BaseController
 {
     public function __construct(...$params)
 	{
-        helper('business_function_helper');
+        // helper('business_function_helper');
     }
     
     public function set()

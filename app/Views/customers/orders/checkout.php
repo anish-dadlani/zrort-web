@@ -2,7 +2,7 @@
 if(isset($empty) && $empty == "Yes"){
 	echo "<script>
 	alert('Your cart is empty! Please add some products to cart to place order.');
-	window.location.href = '".base_url('customer/dashboard')."'; </script>";
+	window.location.href = '".base_url('/')."'; </script>";
 }
 ?>
 <div class="gambo-Breadcrumb">
@@ -185,25 +185,19 @@ if(isset($empty) && $empty == "Yes"){
 												<div class="owl-carousel date-slider owl-theme">
 													<div class="item">
 														<div class="date-now">
-															<input type="radio" id="time" name="date" value="Morning" checked="">
-															<label for="Morning">Morning</label>
+															<input type="radio" id="time" name="date" value="Instant" checked="">
+															<label for="Morning">Instant</label>
 														</div>
 													</div>
 													<div class="item">
 														<div class="date-now">
-															<input type="radio" id="time1" name="date" value="Afternoon">
-															<label for="Afternoon">Afternoon</label>
-														</div>
-													</div>
-													<div class="item">
-														<div class="date-now">
-															<input type="radio" id="time2" name="date" value="Evening">
-															<label for="Evening">Evening</label>
+															<input type="radio" id="time1" name="date" value="Interval">
+															<label for="Afternoon">Interval</label>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="time-radio">
+											<div class="time-radio" id="hideInstant">
 												<div class="ui form">
 													<div class="grouped fields">
 														<div class="field">
@@ -373,8 +367,10 @@ if(isset($empty) && $empty == "Yes"){
 							$business_ids[] = $item['bussiness_id'];
 							$business_ids = array_unique($business_ids);
 						endforeach;
-						foreach($business_ids as $id){
-							$charges = $charges + get_business_delivery_charges($id);
+						if(isset($business_ids) && !empty($business_ids)){
+							foreach($business_ids as $id){
+								$charges = $charges + get_business_delivery_charges($id);
+							}
 						}
 						foreach($_SESSION['cart'] as $key => $item): 
 							if(isset($item['discount_amount'])){
@@ -439,3 +435,12 @@ if(isset($empty) && $empty == "Yes"){
 		</div>
 	</div>
 </div>
+
+<!-- <script>
+$("#time").click(function(){ 
+	if($(this).is(":checked")){ 
+		var val = $(this).val();
+		alert(val);
+	}
+});
+</script> -->

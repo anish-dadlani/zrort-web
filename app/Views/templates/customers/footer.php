@@ -1,5 +1,6 @@
 </div>
 <!-- Body End -->
+<?php $data = customerDashboard(); ?>
 <footer class="footer">
 		<div class="footer-first-row">
 			<div class="container">
@@ -32,8 +33,8 @@
 						<div class="second-row-item">
 							<h4>Categories</h4>
 							<ul>
-							<?php foreach ($_SESSION['categories'] as $key => $item): ?>
-								<li><a href="<?= base_url().'/products/category/view'.'/'.$item['pk_id']?>"><?= $item['name'] ?></a></li>
+							<?php foreach ($data['business_catgories'] as $key => $item): ?>
+								<li><a href="#"><?= $item['title'] ?></a></li>
 							<?php endforeach?>
 							</ul>
 						</div>
@@ -97,13 +98,13 @@
 								</ul>
 							</div>
 						</div>
-						<div class="second-row-item-payment">
+						<!-- <div class="second-row-item-payment">
 							<h4>Newsletter</h4>
 							<div class="newsletter-input">
 								<input id="emailaddress" name="emailaddress" type="text" placeholder="Email Address" class="form-control input-md" required="">
 								<button class="newsletter-btn hover-btn" type="submit"><i class="uil uil-telegram-alt"></i></button>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

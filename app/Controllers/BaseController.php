@@ -28,7 +28,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['form'];
+	protected $helpers = ['form', 'business_function_helper'];
 	protected $session;
 	protected $db;
 	protected $validation;
