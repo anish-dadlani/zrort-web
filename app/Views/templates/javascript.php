@@ -1,7 +1,7 @@
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript">
 $(window).on('load', function(){
-    showWishlistCount();
+    // showWishlistCount();
     showCartCount();
     $('#suggestions').hide();
 });
@@ -91,7 +91,7 @@ function addToWishList(productID){
                 alert("Product Already Exist in Wishlist!")
             }else{
                 alert("Product Successfully Added To Wishlist!");
-                showWishlistCount();
+                // showWishlistCount();
             }
         }
     });
@@ -104,7 +104,7 @@ function deleteFromWishlist(productID){
         success: function(data) {
             alert("Product Successfully Removed From Wishlist!");
             window.location.href = '<?= base_url('customer/wishlist')?>';
-            showWishlistCount();
+            // showWishlistCount();
         }
     });
 }

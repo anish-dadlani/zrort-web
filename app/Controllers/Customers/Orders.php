@@ -63,6 +63,7 @@ class Orders extends BaseController
 
     public function saveOrder()
     {
+        // print_r($_REQUEST); exit;
         $orderModel = new OrderModel();
         $PaymentDetailModel = new PaymentDetailModel();
         $customerCartModel = new CustomerCartModel();
@@ -127,10 +128,12 @@ class Orders extends BaseController
                     }
                     $sumTotal = $sumTotal + $charges;
                 }
-
+                if($this->request->getPost('date111') == 'Instant'){
+                    $instantDelivery = 1;
+                }
                 $orderData = [
                     'order_no' => $order_no??NULL,
-                    'date_time' => $this->request->getPost('date').', '.$this->request->getPost('time')??NULL,
+                    'date_time' => $this->request->getPost('date111').', '.$this->request->getPost('time')??NULL,
                     'address' => $this->request->getPost('flat').', '.$this->request->getPost('street').', '.$this->request->getPost('sector_colony').', '.$this->request->getPost('locality'),
                     'sub_total' => $subTotal??NULL,
                     'delivery_fee' => $charges??NULL,
@@ -143,7 +146,7 @@ class Orders extends BaseController
                     'order_platform' => $this->request->getPost('order_platform')??NULL, 
                     'payment_method_id' => get_method_id($this->request->getPost('paymentmethod'))??NULL, 
                     'payment_method_detail_id' => $payment_method_detail_id??NULL, 
-                    'instant_delivery' => $this->request->getPost('instant_delivery')??NULL, 
+                    'instant_delivery' => $instantDelivery??0, 
                     'instant_delivery_charges'=> $this->request->getPost('instant_delivery_charges')??NULL,
                 ];
                 $orderModel->save($orderData);

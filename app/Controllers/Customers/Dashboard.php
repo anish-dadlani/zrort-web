@@ -7,6 +7,7 @@ use App\Models\Customers\ProductsModel;
 use App\Models\Customers\CustomerCartModel;
 use App\Models\Customers\OrderModel;
 use App\Models\Businessadmin\BusinessCategoriesModel;
+use App\Models\Businessadmin\MarkersModel;
 use CodeIgniter\Controller;
 
 use App\Controllers\BaseController;
@@ -23,9 +24,12 @@ class Dashboard extends BaseController
 
     public function getBusinessListing()
     {
+        $BusinessModel = new BusinessModel();
+        // $displaydata['markers'] = $MarkersModel->findAll();
+        $displaydata['markers'] = $BusinessModel->select('pk_id as id, name, business_address as address, lat, lang as lng')->findAll();
         $data['pageTitle'] = 'Zrort | Dashboard';
 		$data['fileToLoad'] = '/customers/dashboard';
-		$data['data'] = [];
+		$data['data'] = $displaydata;
 		echo view('templates/customers/customer_template', $data);
     }
 

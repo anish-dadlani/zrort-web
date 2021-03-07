@@ -181,52 +181,52 @@ if(isset($empty) && $empty == "Yes"){
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="control-label">Select Delivery Time*</label>
-											<div class="date-slider-group">
-												<div class="owl-carousel date-slider owl-theme">
+											<!-- <div class="date-slider-group"> -->
+												<!-- <div class="owl-carousel date-slider owl-theme"> -->
 													<div class="item">
 														<div class="date-now">
-															<input type="radio" id="time" name="date" value="Instant" checked="">
+															<input type="radio" class="clickTime" id="time" name="date111" value="Instant" checked="">
 															<label for="Morning">Instant</label>
 														</div>
 													</div>
 													<div class="item">
 														<div class="date-now">
-															<input type="radio" id="time1" name="date" value="Interval">
+															<input type="radio" class="clickTime" id="time1" name="date111" value="Interval">
 															<label for="Afternoon">Interval</label>
 														</div>
 													</div>
-												</div>
-											</div>
+												<!-- </div> -->
+											<!-- </div> -->
 											<div class="time-radio" id="hideInstant">
 												<div class="ui form">
 													<div class="grouped fields">
 														<div class="field">
 															<div class="ui radio checkbox chck-rdio">
-																<input type="radio" id="date" name="time" value="8.00AM - 10.00AM" checked="" tabindex="0" class="hidden">
+																<input type="radio" class="uncheck" id="date" name="time" value="8.00AM - 10.00AM" checked="" tabindex="0" class="hidden">
 																<label>8.00AM - 10.00AM</label>
 															</div>
 														</div>
 														<div class="field">
 															<div class="ui radio checkbox chck-rdio">
-																<input type="radio" id="date1" name="time" value="10.00AM - 12.00PM" tabindex="0" class="hidden">
+																<input type="radio" class="uncheck" id="date1" name="time" value="10.00AM - 12.00PM" tabindex="0" class="hidden">
 																<label>10.00AM - 12.00PM</label>
 															</div>
 														</div>
 														<div class="field">
 															<div class="ui radio checkbox chck-rdio">
-																<input type="radio" id="date2" name="time" value="12.00PM - 2.00PM" tabindex="0" class="hidden">
+																<input type="radio" class="uncheck" id="date2" name="time" value="12.00PM - 2.00PM" tabindex="0" class="hidden">
 																<label>12.00PM - 2.00PM</label>
 															</div>
 														</div>
 														<div class="field">
 															<div class="ui radio checkbox chck-rdio">
-																<input type="radio" id="date3" name="time" value="2.00PM - 4.00PM" tabindex="0" class="hidden">
+																<input type="radio" class="uncheck" id="date3" name="time" value="2.00PM - 4.00PM" tabindex="0" class="hidden">
 																<label>2.00PM - 4.00PM</label>
 															</div>
 														</div>
 														<div class="field">
 															<div class="ui radio checkbox chck-rdio">
-																<input type="radio" id="date4" name="time" value="4.00PM - 6.00PM" tabindex="0" class="hidden">
+																<input type="radio" class="uncheck" id="date4" name="time" value="4.00PM - 6.00PM" tabindex="0" class="hidden">
 																<label>4.00PM - 6.00PM</label>
 															</div>
 														</div>
@@ -436,11 +436,20 @@ if(isset($empty) && $empty == "Yes"){
 	</div>
 </div>
 
-<!-- <script>
-$("#time").click(function(){ 
+<script>
+$(window).on('load', function(){
+	document.getElementById('hideInstant').style.display = 'none';
+	$('.uncheck').removeAttr('checked');
+});
+$(".clickTime").click(function(){ 
 	if($(this).is(":checked")){ 
 		var val = $(this).val();
-		alert(val);
+		if(val == 'Instant'){
+			document.getElementById('hideInstant').style.display = 'none';
+			$('.uncheck').removeAttr('checked');
+		}else if(val == 'Interval'){
+			document.getElementById('hideInstant').style.display = '';
+		}
 	}
 });
-</script> -->
+</script>
