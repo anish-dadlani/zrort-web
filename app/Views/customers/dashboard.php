@@ -20,7 +20,7 @@
     if(isset($markers) && !empty($markers)){ ?>
         var map;
         function loadMap() {
-            var a = {lat: -33.840282, lng:151.207474};
+            var a = {lat: 33.72148, lng:73.04329};
             map = new google.maps.Map(document.getElementById('map'),{
                 zoom: 12,
                 center: a
@@ -56,4 +56,4 @@
         }
 <?php } ?>
 </script>
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu0foMTL3VMqtZDYUn2fjFqjS22ZXBWyI&callback=loadMap"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9KG5eaSmyRBFmTi20MFk1sQzZUf-rrpI&callback=loadMap"></script>

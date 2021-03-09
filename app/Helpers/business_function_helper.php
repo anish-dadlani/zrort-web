@@ -176,7 +176,10 @@ if(!function_exists('get_unit_by_product_id')){
 		$query = $db->query("SELECT unit_title FROM products_units pu join products p on pu.pk_id = p.product_unit_id
 		where p.pk_id='{$product_id}'");
 		$unit_title = $query->getRowArray();
-		return $unit_title['unit_title'];
+		if(!empty($unit_title))
+			return $unit_title['unit_title'];
+		else 
+			return;
 	}
 }
 

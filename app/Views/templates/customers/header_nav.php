@@ -46,17 +46,19 @@
 						</a>
 					</li>	
 					<li class="ui dropdown">
+					<?php if (isset($_SESSION['UserAuth']) == 'Yes') {?>
 						<a href="#" class="opts_account">
 							<img src="<?= base_url() ?>/assets/customers/images/avatar/img-5.jpg" alt="">
-							<span class="user__name">
-								<?php if (isset($_SESSION['UserAuth']) == 'Yes') {
-										echo $_SESSION['firstname']; 
-									} else {
-										echo 'Login';
-									} ?>
-							</span>
+							<span class="user__name"><?php echo $_SESSION['firstname']; ?></span>
 							<i class="uil uil-angle-down"></i>
 						</a>
+					<?php } else { ?>
+						<a href="<?php echo base_url(); ?>/customer" class="opts_account">
+							<img src="<?= base_url() ?>/assets/customers/images/avatar/img-5.jpg" alt="">
+							<span class="user__name"> Login </span>
+							<i class="uil"></i>
+						</a>
+					<?php } ?>
 						<?php if(isset($_SESSION['UserAuth']) == 'Yes'){ ?>
 							<div class="menu dropdown_account">
 								<div class="night_mode_switch__btn">

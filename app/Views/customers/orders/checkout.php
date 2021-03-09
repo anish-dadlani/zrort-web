@@ -116,13 +116,13 @@ if(isset($empty) && $empty == "Yes"){
 														<div class="col-lg-6 col-md-12">
 															<div class="form-group">
 																<label class="control-label">Name*</label>
-																<input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" value="<?= $_SESSION['firstname'].' '.$_SESSION['lastname']?>" disabled="disabled">
+																<input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" value="<?php if(isset($_SESSION['UserAuth']) == 'Yes'){ echo $_SESSION['firstname'].' '.$_SESSION['lastname']; } ?>" disabled="disabled">
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-12">
 															<div class="form-group">
 																<label class="control-label">Email Address*</label>
-																<input id="email" name="email" type="text" placeholder="Email Address" class="form-control input-md" value="<?= $_SESSION['email'] ?>" disabled="disabled">
+																<input id="email" name="email" type="text" placeholder="Email Address" class="form-control input-md" value="<?php if(isset($_SESSION['UserAuth']) == 'Yes'){ echo $_SESSION['email']; } ?>" disabled="disabled">
 															</div>
 														</div>
 														<div class="col-lg-12 col-md-12">
