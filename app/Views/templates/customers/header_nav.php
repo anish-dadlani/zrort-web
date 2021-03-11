@@ -40,9 +40,10 @@
 					<!-- <li> <a href="#" class="offer-link"><i class="uil uil-gift"></i>Offers</a> </li>
 					<li> <a href="#" class="offer-link"><i class="uil uil-question-circle"></i>Help</a> </li> -->
 					<li>
-						<a href="#" class="hover-btn pull-bs-canvas-left" title="Wishlist">
-							<i class='uil uil-shopping-cart-alt'></i>
+						<a href="#" class="hover-btn-cst pull-bs-canvas-left" title="Wishlist">
+							<!-- <i class='uil uil-shopping-cart-alt'></i> -->
 							<!-- <span class="noti_count1" id="count">3</span> -->
+							<i class="fas fa-shopping-basket"></i>
 						</a>
 					</li>	
 					<li class="ui dropdown">
@@ -138,5 +139,18 @@
 			</div>
 		</div>
 	</div> -->
+	<ul class="nav nav-pills" style="top: 66px;    position: absolute;    right: 0px;">  
+	<li class="nav-item">
+    <a class="nav-link active" data-toggle="pill"  href="#mapdiv">
+		<i data-toggle="tooltip" title="Store Location" class="far fa-map"></i>
+	</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="pill" href="#businessdiv">
+		<i data-toggle="tooltip" title="Business" class="fas fa-th-list"></i>
+	</a>
+  </li>
+</ul>
 </header>
+
 <!-- Header End -->

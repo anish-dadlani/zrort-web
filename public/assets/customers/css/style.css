@@ -1763,7 +1763,7 @@ i.icon1 {
 /* --- Index Page --- */
 
 .wrapper {
-    padding-top: 128px;
+    padding-top: 105px;
 	padding-bottom: 50px;
 }
 
@@ -6585,3 +6585,8 @@ textarea {
     font-weight: 500;
     display: inline-block;
 }
+.hover-btn-cst{
+	color: #f55d2a;
+	transition: all 0.3s;
+}
+

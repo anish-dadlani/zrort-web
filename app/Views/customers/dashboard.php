@@ -1,13 +1,21 @@
 <style>
     #map {
-        height: 100%;
+        height: 80vh;
     }
     #data{
         display: none;
     }
 </style>
 
-<div id="map"></div>
+<div class="wrapper">
+	<div class="container-fluid p-0">
+		<div class="row">
+			<div class="col-lg-12">
+				<div id="map"></div>
+			</div>
+		</div>
+	</div>
+</div>
 <?php 
     if(isset($markers) && !empty($markers)){
         $data = json_encode($markers, true);
