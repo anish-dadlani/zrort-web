@@ -40,26 +40,26 @@
 					<!-- <li> <a href="#" class="offer-link"><i class="uil uil-gift"></i>Offers</a> </li>
 					<li> <a href="#" class="offer-link"><i class="uil uil-question-circle"></i>Help</a> </li> -->
 					<li>
-						<a href="#" class="hover-btn-cst pull-bs-canvas-left" title="Wishlist">
+						<a href="#" class="hover-btn-cst pull-bs-canvas-left" title="Cart">
 							<!-- <i class='uil uil-shopping-cart-alt'></i> -->
 							<!-- <span class="noti_count1" id="count">3</span> -->
 							<i class="fas fa-shopping-basket"></i>
 						</a>
 					</li>	
 					<li class="ui dropdown">
-					<?php if (isset($_SESSION['UserAuth']) == 'Yes') {?>
-						<a href="#" class="opts_account">
-							<img src="<?= base_url() ?>/assets/customers/images/avatar/img-5.jpg" alt="">
-							<span class="user__name"><?php echo $_SESSION['firstname']; ?></span>
-							<i class="uil uil-angle-down"></i>
-						</a>
-					<?php } else { ?>
-						<a href="<?php echo base_url(); ?>/customer" class="opts_account">
-							<img src="<?= base_url() ?>/assets/customers/images/avatar/img-5.jpg" alt="">
-							<span class="user__name"> Login </span>
-							<i class="uil"></i>
-						</a>
-					<?php } ?>
+						<?php if (isset($_SESSION['UserAuth']) == 'Yes') {?>
+							<a href="#" class="opts_account">
+								<img src="<?= base_url() ?>/assets/customers/images/avatar/img-5.jpg" alt="">
+								<span class="user__name"><?php echo $_SESSION['firstname']; ?></span>
+								<i class="uil uil-angle-down"></i>
+							</a>
+						<?php } else { ?>
+							<a href="<?php echo base_url(); ?>/customer" class="opts_account">
+								<img src="<?= base_url() ?>/assets/customers/images/avatar/img-5.jpg" alt="">
+								<span class="user__name"> Login </span>
+								<i class="uil"></i>
+							</a>
+						<?php } ?>
 						<?php if(isset($_SESSION['UserAuth']) == 'Yes'){ ?>
 							<div class="menu dropdown_account">
 								<div class="night_mode_switch__btn">

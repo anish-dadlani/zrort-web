@@ -8,6 +8,6 @@
     <div class="wrapper">
 		<?php echo view ($fileToLoad, $data); ?> 
 	<?php echo view('/templates/customers/footer'); ?>
-	<?php echo view ('/templates/customers/script'); ?>
+	<?php echo view('/templates/customers/script'); ?>
 	<?php echo view('/templates/javascript'); ?> 
 </html>

@@ -121,7 +121,7 @@ class Products extends BaseController
         $displaydata['business_id'] = $business_id;
 
         $data['pageTitle'] = 'Business Products';
-        $data['fileToLoad'] = '/customers/dashboard';
+        $data['fileToLoad'] = '/customers/dashboard2';
         $data['data'] = $displaydata;
 
         echo view('templates/customers/customer_template_two', $data);

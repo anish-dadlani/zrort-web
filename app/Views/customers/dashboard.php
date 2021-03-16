@@ -6,16 +6,22 @@
         display: none;
     }
 </style>
-
-<div class="wrapper">
-	<div class="container-fluid p-0">
-		<div class="row">
-			<div class="col-lg-12">
-				<div id="map"></div>
-			</div>
+    <div class="tab-content">
+		<div class="tab-pane container-fluid active p-0" id="mapdiv">
+            <div class="wrapper">
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+		<div class="tab-pane container-fluid fade p-0" id="businessdiv">
+			<?php echo view('/templates/customers/offers'); ?>
 		</div>
 	</div>
-</div>
 <?php 
     if(isset($markers) && !empty($markers)){
         $data = json_encode($markers, true);
